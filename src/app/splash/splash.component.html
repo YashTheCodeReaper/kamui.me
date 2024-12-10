@@ -1,0 +1,57 @@
+<section class="kamui_lander" *ngIf="!showLander">
+  <h5>{{ countDown }}%</h5>
+  <div class="border" [ngStyle]="{ width: countDown + '%' }"></div>
+  <div
+    class="kl_wrap dummy"
+    [ngClass]="{ kl_wrap_mini: klBoxes[0].length === 3 }"
+  >
+    <ng-container *ngFor="let klBoxL1 of klBoxes; let i = index">
+      <div
+        *ngFor="let klBoxL2 of klBoxL1"
+        class="kl_wrap_box dummy"
+        #klBox
+        data-hover="false"
+        data-turn="false"
+      ></div>
+    </ng-container>
+    <div class="logo" style="--logo-scale: 0.5">
+      <div class="logo_crit one">
+        <div class="comp comp1"></div>
+        <div class="comp comp2"></div>
+        <div class="comp comp3"></div>
+      </div>
+      <div class="logo_crit two"></div>
+      <div class="logo_crit three">
+        <div class="comp comp1"></div>
+        <div class="comp comp2"></div>
+        <div class="comp comp3"></div>
+      </div>
+      <div class="logo_crit four">
+        <div class="ball"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="kamui_lander" *ngIf="showLander" (mousewheel)="flipAll()">
+  <div class="kl_wrap" [ngClass]="{ kl_wrap_mini: klBoxes[0].length === 3 }">
+    <ng-container *ngFor="let klBoxL1 of klBoxes; let i = index">
+      <div
+        *ngFor="let klBoxL2 of klBoxL1"
+        class="kl_wrap_box"
+        #klBox
+        data-hover="false"
+        data-turn="false"
+        [style]="{
+          '--sp-pos-x': klBoxL2,
+          '--sp-pos-y': i
+        }"
+        (mouseenter)="onItemHover(klBox)"
+        (touchstart)="onItemHover(klBox)"
+      >
+        <div class="box_component" data-box-component="front"></div>
+        <div class="box_component" data-box-component="back"></div>
+      </div>
+    </ng-container>
+  </div>
+</section>
