@@ -1,151 +1,3 @@
-.logo {
-  width: calc(var(--logo-scale) * 17.5rem);
-  height: calc(var(--logo-scale) * 20rem);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) skewX(7deg);
-  animation: kl_op-animate 250ms linear forwards;
-  animation-delay: 4s;
-
-  &_unskew {
-    transform: skewX(30deg);
-  }
-
-  &_crit {
-    position: absolute;
-    overflow: hidden;
-
-    .comp {
-      background-color: var(--main-3);
-      position: absolute;
-    }
-  }
-
-  &_crit.one {
-    width: calc(var(--logo-scale) * 17.5rem);
-    height: calc(var(--logo-scale) * 9.5rem);
-    z-index: 1;
-
-    .comp1 {
-      width: 60%;
-      height: 100%;
-      bottom: 0;
-      left: 20%;
-      transform: skewX(-35deg);
-      border-bottom-right-radius: calc(var(--logo-scale) * 2rem);
-      z-index: 1;
-    }
-
-    .comp2 {
-      background-color: var(--main-1a);
-      width: 60%;
-      height: 100%;
-      bottom: 20%;
-      left: 10%;
-      transform: skewX(-30deg);
-      border-bottom-right-radius: calc(var(--logo-scale) * 2rem);
-      z-index: 2;
-    }
-
-    .comp3 {
-      width: 40%;
-      height: 100%;
-      bottom: 25%;
-      left: 26.5%;
-      transform: skewX(-30deg);
-      border-bottom-right-radius: calc(var(--logo-scale) * 2rem);
-      z-index: 3;
-      background: repeating-linear-gradient(
-        0deg,
-        var(--main-3),
-        var(--main-3) calc(var(--logo-scale) * 1.5rem),
-        transparent calc(var(--logo-scale) * 1rem),
-        transparent calc(var(--logo-scale) * 2rem)
-      );
-    }
-  }
-
-  &_crit.two {
-    height: calc(var(--logo-scale) * 20rem);
-    width: calc(var(--logo-scale) * 3rem);
-    background: var(--main-3);
-    z-index: 2;
-    transform: skewX(-30deg);
-    left: calc(var(--logo-scale) * -4rem);
-  }
-
-  &_crit.three {
-    width: calc(var(--logo-scale) * 17.5rem);
-    height: calc(var(--logo-scale) * 9.5rem);
-    z-index: 1;
-    bottom: 0;
-    left: -38%;
-    transform: rotateX(-180deg);
-
-    .comp1 {
-      width: 60%;
-      height: 100%;
-      bottom: 0;
-      left: 20%;
-      transform: skewX(30deg);
-      border-bottom-right-radius: calc(var(--logo-scale) * 2rem);
-      z-index: 1;
-    }
-
-    .comp2 {
-      background-color: var(--main-1a);
-      width: 60%;
-      height: 100%;
-      bottom: 20%;
-      left: 0%;
-      transform: skewX(31deg);
-      border-bottom-right-radius: calc(var(--logo-scale) * 2rem);
-      z-index: 2;
-    }
-
-    .comp3 {
-      width: 40%;
-      height: 100%;
-      bottom: 25%;
-      left: 12.5%;
-      transform: skewX(30deg);
-      border-bottom-right-radius: calc(var(--logo-scale) * 2rem);
-      z-index: 3;
-      background: repeating-linear-gradient(
-        0deg,
-        var(--main-3),
-        var(--main-3) calc(var(--logo-scale) * 1.5rem),
-        transparent calc(var(--logo-scale) * 1rem),
-        transparent calc(var(--logo-scale) * 2rem)
-      );
-    }
-  }
-
-  &_crit.four {
-    height: calc(var(--logo-scale) * 8.5rem);
-    width: calc(var(--logo-scale) * 3rem);
-    background: var(--main-3);
-    z-index: 2;
-    transform: skewX(-30deg);
-    right: calc(var(--logo-scale) * 6.5rem);
-    bottom: 0;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    .ball {
-      width: calc(var(--logo-scale) * 2.5rem);
-      height: calc(var(--logo-scale) * 2.5rem);
-      border-radius: 5rem;
-      background: var(--main-2);
-      margin-top: -1.5rem;
-    }
-  }
-}
-
 .kamui_lander {
   width: 100vw;
   height: 100vh;
@@ -186,7 +38,8 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    gap: 0.25rem;
+    grid-gap: min(min(3px,.1919385797vw),.3076923077svh);
+    gap: min(min(3px,.1919385797vw),.3076923077svh);
     transform: translateZ(-20px);
     transform-style: preserve-3d;
     will-change: transform;
@@ -245,21 +98,13 @@
         animation: kl_rotate-permanent 600ms linear forwards;
       }
     }
-
-    &_box.dummy {
-      background-color: var(--main-1a);
-    }
-  }
-
-  .kl_wrap.dummy {
-    gap: 0;
-    transform: translateZ(0px);
-    animation: kl_gap-animate reverse linear 300ms forwards;
-    animation-delay: 3s;
   }
 
   .kl_wrap_mini {
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: min(min(3px,.3926701571vw),.1958224543svh);
+    gap: min(min(3px,.3926701571vw),.1958224543svh);
+    transform: translateZ(-30px);
 
     .kl_wrap_box {
       .box_component {

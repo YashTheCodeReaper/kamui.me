@@ -20,9 +20,6 @@ export class SplashComponent implements AfterViewInit {
     [0, 1, 2, 3, 4, 5],
   ];
   hasFlippedAll: boolean = false;
-  showLander: boolean = false;
-  countDown: number = 0;
-  countDownInterval: any;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -50,33 +47,26 @@ export class SplashComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.showLander = true;
-      if (document.body.clientWidth < 764) {
-        this.klBoxes = [
-          [0, 1, 2],
-          [0, 1, 2],
-          [0, 1, 2],
-          [0, 1, 2],
-          [0, 1, 2],
-          [0, 1, 2],
-        ];
-      } else {
-        this.klBoxes = [
-          [0, 1, 2, 3, 4, 5],
-          [0, 1, 2, 3, 4, 5],
-          [0, 1, 2, 3, 4, 5],
-          [0, 1, 2, 3, 4, 5],
-          [0, 1, 2, 3, 4, 5],
-          [0, 1, 2, 3, 4, 5],
-        ];
-      }
-      this.initKlItems(true);
-    }, 4300);
-    this.countDownInterval = setInterval(() => {
-      this.countDown++;
-      if (this.countDown == 100) clearInterval(this.countDownInterval);
-    }, 33);
+    if (document.body.clientWidth < 764) {
+      this.klBoxes = [
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1, 2],
+        [0, 1, 2],
+      ];
+    } else {
+      this.klBoxes = [
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+        [0, 1, 2, 3, 4, 5],
+      ];
+    }
+    this.initKlItems();
   }
 
   initKlItems(forceFlip?: true): void {
