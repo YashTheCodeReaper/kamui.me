@@ -6,5 +6,16 @@
 }
 
 .ff_gr {
-    font-family: "Giant-Robots";
+    font-family: "Giant-Robots", sans-serif;
+}
+
+@font-face {
+  font-family: "Neue Hass Grotesk";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Neue Hass Grotesk"), url("../fonts/neue-hass-grotesk.woff2") format("truetype");
+}
+
+.ff_nhg {
+    font-family: "Neue Hass Grotesk", sans-serif;
 }

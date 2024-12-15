@@ -1,14 +1,51 @@
 <section class="home_section">
+  <div class="bg-stripe" style="--hbgs: 0"></div>
+  <div class="bg-stripe" style="--hbgs: 1"></div>
+  <div class="bg-stripe" style="--hbgs: 2"></div>
+  <div class="bg-stripe" style="--hbgs: 3"></div>
+  <div class="bg-stripe" style="--hbgs: 4"></div>
+  <div class="bg-stripe" style="--hbgs: 5"></div>
   <div class="hs_tilter">
     <div class="hs hs1">
       <div class="hs_enc">
-        <app-logo [logoScale]="1.2"></app-logo>
+        <app-logo></app-logo>
       </div>
     </div>
-    <div class="hs hs2">
-      <div class="hs_enc">
-        <app-logo [logoPalette]="'logoBlack'" [logoScale]="1.2"></app-logo>
-      </div>
+  </div>
+  <div class="feature-slider">
+    <div class="feature-content-flex ff_nhg">
+      <h5 class="fcf-h5">{{featureTitle}}</h5>
+      <h1 class="fcf-h11">{{featureContentH11}}</h1>
+      <h1 class="fcf-h12">{{featureContentH12}}</h1>
     </div>
+    <div class="slider-indicator-flex">
+      <div class="si si1"></div>
+      <div class="si si2"></div>
+      <div class="si si3"></div>
+      <div class="si si4"></div>
+    </div>
+  </div>
+  <div class="attribute ff_nhg">
+    <p>Website by</p>
+    <h5>Yashwanth</h5>
+    <div class="border"></div>
+  </div>
+  <div class="context c1 ff_nhg">
+    <p>Just a curious mind</p>
+    <p>Who loves to code</p>
+    <p>And finds joy in the results</p>
+  </div>
+  <div class="context c2 ff_nhg">
+    <p>An explorer in the world of code</p>
+    <p>Driven by curiosity</p>
+    <p>And passion towards it</p>
+  </div>
+  <div class="short-video ff_nhg">
+    <h5>Watch the video</h5>
+    <div class="watch-button" role="button">
+      <h2>Watch</h2>
+      <i class="fi fi-ss-play-circle"></i>
+    </div>
+    <div class="border"></div>
   </div>
 </section>

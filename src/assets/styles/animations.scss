@@ -101,3 +101,14 @@
     opacity: 0;
   }
 }
+
+// --------------
+
+@keyframes h_slider-active {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
