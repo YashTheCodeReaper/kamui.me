@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
 @font-face {
   font-family: "Giant-Robots";
   font-style: normal;
@@ -6,16 +8,21 @@
 }
 
 .ff_gr {
-    font-family: "Giant-Robots", sans-serif;
+  font-family: "Giant-Robots", sans-serif;
 }
 
 @font-face {
   font-family: "Neue Hass Grotesk";
   font-style: normal;
   font-weight: normal;
-  src: local("Neue Hass Grotesk"), url("../fonts/neue-hass-grotesk.woff2") format("truetype");
+  src: local("Neue Hass Grotesk"),
+    url("../fonts/neue-hass-grotesk.woff2") format("truetype");
 }
 
 .ff_nhg {
-    font-family: "Neue Hass Grotesk", sans-serif;
+  font-family: "Neue Hass Grotesk", sans-serif;
+}
+
+.ff_os {
+  font-family: "Open Sans", sans-serif;
 }

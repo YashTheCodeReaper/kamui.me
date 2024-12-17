@@ -12,6 +12,7 @@
 
   header {
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
     display: flex;
@@ -19,6 +20,33 @@
     justify-content: space-between;
     padding: 4rem 2rem;
     z-index: 9;
+
+    * {
+      transition: all 300ms ease;
+    }
+
+    .context {
+      z-index: 11;
+      position: absolute;
+      top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      p {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+
+    .context.c1 {
+      left: 50vw;
+    }
+
+    .context.c2 {
+      right: 30rem;
+    }
 
     h3 {
       font-size: 2rem;
@@ -28,10 +56,48 @@
         color: var(--main-2);
       }
     }
+
+    .menu-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      gap: 0.5rem;
+
+      i {
+        font-size: 2.4rem;
+        height: 2.5rem;
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 1em;
+      }
+    }
+  }
+
+  .dark_class {
+    color: var(--main-1);
+  }
+
+  .bg-stripe {
+    width: calc(100% / 6);
+    height: 100%;
+    border-right: 0.1rem solid var(--main-3);
+    position: absolute;
+    top: 0;
+    left: calc(var(--hbgs) * calc(100 / 6) * 1%);
+    z-index: 2;
+    background-color: transparent;
+    opacity: 0.1;
+
+    &:last-child {
+      border-right: 0;
+    }
   }
 
   .sidebar {
-    z-index: 9;
+    z-index: 4;
     position: fixed;
     height: 100%;
     top: 0;
@@ -43,36 +109,17 @@
     padding: 4rem 0;
 
     .social-icons {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 3.5rem;
-        position: absolute;
-        bottom: 5.5rem;
-        left: 0;
-
-        i {
-            font-size: 1.4rem;
-        }
-    }
-
-    .menu-box {
-      width: 100%;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      gap: 0.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 3.5rem;
+      position: absolute;
+      bottom: 5.5rem;
+      left: 0;
 
       i {
-        font-size: 3rem;
-        height: 3.5rem;
-      }
-
-      p {
-        font-weight: 500;
-        font-size: 1em;
+        font-size: 1.4rem;
       }
     }
   }

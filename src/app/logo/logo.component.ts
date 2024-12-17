@@ -35,7 +35,7 @@ export class LogoComponent implements AfterViewInit {
 
       const texture = new THREE.TextureLoader().load(
         `assets/images/${
-          this.logoPalette == 'logoRed' ? 'oly_2.svg' : 'oly_2.svg'
+          this.logoPalette == 'logoRed' ? 'oly_1.svg' : 'oly_1.svg'
         }`
       );
       texture.colorSpace = THREE.SRGBColorSpace;
@@ -46,7 +46,7 @@ export class LogoComponent implements AfterViewInit {
         alpha: true,
         antialias: true,
       });
-      renderer.setSize(window.innerWidth * 0.75, window.innerHeight * 0.75);
+      renderer.setSize(window.innerWidth * 0.65, window.innerHeight * 0.65);
       this.logoSectionEl.nativeElement.appendChild(renderer.domElement);
 
       const geometry = new THREE.PlaneGeometry(4, 4, 40, 40);

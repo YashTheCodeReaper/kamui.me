@@ -1,13 +1,33 @@
 <div class="main">
-  <header>
+  <header [ngClass]="{ dark_class: showMenu }">
     <h3 class="ff_gr">KAMUI.<span>me</span></h3>
+    <div class="context c1 ff_nhg">
+      <p>Just a curious mind</p>
+      <p>Who loves to code</p>
+      <p>And finds joy in the results</p>
+    </div>
+    <div class="context c2 ff_nhg">
+      <p>An explorer in the world of code</p>
+      <p>Driven by curiosity</p>
+      <p>And passion towards it</p>
+    </div>
+    <div class="menu-box" role="button" (click)="toggleMenu()">
+      <i *ngIf="!showMenu" class="fi fi-ss-menu-burger"></i>
+      <i *ngIf="showMenu" class="fi fi-ss-cross"></i>
+      <p class="ff_os">{{showMenu ? 'Close' : 'Menu '}}</p>
+    </div>
   </header>
 
+  <div class="bg-stripe" style="--hbgs: 0"></div>
+  <div class="bg-stripe" style="--hbgs: 1"></div>
+  <div class="bg-stripe" style="--hbgs: 2"></div>
+  <div class="bg-stripe" style="--hbgs: 3"></div>
+  <div class="bg-stripe" style="--hbgs: 4"></div>
+  <div class="bg-stripe" style="--hbgs: 5"></div>
+
+  <app-menu *ngIf="showMenu"></app-menu>
+
   <div class="sidebar">
-    <div class="menu-box" role="button">
-      <i class="fi fi-rs-tally-3"></i>
-      <p>Menu</p>
-    </div>
     <div class="social-icons">
       <i class="fi fi-brands-instagram"></i>
       <i class="fi fi-brands-discord"></i>
@@ -16,5 +36,5 @@
   </div>
   <!-- <app-splash></app-splash> -->
   <app-home></app-home>
-   <!-- <app-logo></app-logo> -->
+  <!-- <app-logo></app-logo> -->
 </div>

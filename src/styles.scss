@@ -1,42 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
+// Icons
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
-
-@import url('./assets/styles/animations.scss');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
+// Internals
 @import url('./assets/styles/fonts.scss');
-
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-}
-
-body.theme_default {
-  // --main-2: #f51a3a;
-  // --main-2a: #ca3c3c;
-  // --main-1: #000;
-  // --main-1a: rgb(28,28,28);
-  // --main-3: #fff;
-  --main-2: #f51a3a;
-  --main-2a: #ca3c3c;
-  --main-1: #fff;
-  --main-1a: #1f1f1f;
-  --main-3: #000;
-}
+@import url('./assets/styles/resets.scss');
+@import url('./assets/styles/themes.scss');
+@import url('./assets/styles/animations.scss');
+@import url('./assets/styles/common.scss');
