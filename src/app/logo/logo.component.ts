@@ -16,7 +16,6 @@ import * as THREE from 'three';
   styleUrl: './logo.component.scss',
 })
 export class LogoComponent implements AfterViewInit {
-  @Input() logoPalette: string = 'logoRed';
   @ViewChild('logoSection') logoSectionEl!: ElementRef;
 
   ngAfterViewInit(): void {
@@ -35,7 +34,7 @@ export class LogoComponent implements AfterViewInit {
 
       const texture = new THREE.TextureLoader().load(
         `assets/images/${
-          this.logoPalette == 'logoRed' ? 'oly_1.svg' : 'oly_1.svg'
+          document.body.classList.contains('theme_default') ? 'oly_1.svg' : 'oly_2.svg'
         }`
       );
       texture.colorSpace = THREE.SRGBColorSpace;

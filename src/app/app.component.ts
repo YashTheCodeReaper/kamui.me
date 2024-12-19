@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { UiService } from './services/ui.service';
 import { CommonModule } from '@angular/common';
 import { gsap, Power4 } from 'gsap';
+import { BulbComponent } from "./bulb/bulb.component";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { gsap, Power4 } from 'gsap';
     LogoComponent,
     MenuComponent,
     CommonModule,
-  ],
+    BulbComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -28,7 +30,13 @@ export class AppComponent {
   toggleMenu(): void {
     try {
       if (this.showMenu) {
-        gsap.to('.ms_c', {
+        gsap.to('.enc', {
+          top: 'unset',
+          bottom: '0',
+          duration: 0,
+          ease: Power4.easeIn,
+        });
+        gsap.to('.enc', {
           height: '0%',
           duration: 0.5,
           ease: Power4.easeIn,
