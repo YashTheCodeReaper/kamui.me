@@ -5,7 +5,7 @@
         <div class="grove"></div>
         <div class="grove"></div>
     </div>
-    <div class="bulb" role="button" (click)="toggleMode()" [ngClass]="{'active': isDarkMode}">
+    <div class="bulb" role="button" (click)="toggleMode()" [ngClass]="{'active': isDarkMode, 'inactive': !isDarkMode}">
         <div class="metal-wire"></div>
         <div class="metal-wire"></div>
         <div class="metal-wire"></div>

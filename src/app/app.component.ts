@@ -7,6 +7,7 @@ import { UiService } from './services/ui.service';
 import { CommonModule } from '@angular/common';
 import { gsap, Power4 } from 'gsap';
 import { BulbComponent } from "./bulb/bulb.component";
+import { PortfolioComponent } from './portfolio/portfolio.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { BulbComponent } from "./bulb/bulb.component";
     LogoComponent,
     MenuComponent,
     CommonModule,
-    BulbComponent
+    BulbComponent,
+    PortfolioComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

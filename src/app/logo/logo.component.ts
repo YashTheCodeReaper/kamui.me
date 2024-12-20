@@ -44,6 +44,7 @@ export class LogoComponent implements AfterViewInit {
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
+        powerPreference: "high-performance"
       });
       renderer.setSize(window.innerWidth * 0.65, window.innerHeight * 0.65);
       this.logoSectionEl.nativeElement.appendChild(renderer.domElement);

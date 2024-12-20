@@ -11,7 +11,7 @@
   z-index: 3;
   top: 0;
   left: 0;
-  scale: 0.75;
+  scale: 0.5;
 }
 
 .wire {
@@ -53,12 +53,17 @@
   justify-content: flex-start;
   gap: -0.1rem;
   z-index: 1;
-  animation: flash 2s linear forwards reverse;
   cursor: pointer;
 }
+
 .bulb.active {
     animation: flash 2s linear forwards;
 }
+
+.bulb.inactive {
+    animation: flash 2s linear forwards reverse;
+}
+
 .metal-wire {
   position: relative;
   border: 0.1rem solid var(--main-1);
