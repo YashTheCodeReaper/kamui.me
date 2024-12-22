@@ -1,11 +1,14 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { LogoComponent } from '../logo/logo.component';
 import { gsap, Power3 } from 'gsap';
+import { BulbComponent } from '../bulb/bulb.component';
+
+declare var Gradient: any;
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [LogoComponent],
+  imports: [LogoComponent, BulbComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -14,8 +17,11 @@ export class HomeComponent implements AfterViewInit {
   featureTitle: string = 'Featured blog';
   featureContentH11: string = 'Journey Of';
   featureContentH12: string = 'The Tarnished';
+  gradient: any;
 
   ngAfterViewInit(): void {
+    this.gradient = new Gradient();
+    this.gradient.initGradient('#home-gradient-canvas')
     this.modifySlider();
     setInterval(() => this.modifySlider(), 12000);
   }

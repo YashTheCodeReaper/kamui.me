@@ -1,6 +1,11 @@
 <div class="main">
   <header [ngClass]="{ dark_class: showMenu }">
     <h3 class="ff_gr">KAMUI.<span>me</span></h3>
+    <div class="menu-box" role="button" (click)="toggleMenu()">
+      <i *ngIf="!showMenu" class="fi fi-ss-menu-burger"></i>
+      <i *ngIf="showMenu" class="fi fi-ss-cross"></i>
+      <p class="ff_mb">{{showMenu ? 'Close' : 'Menu '}}</p>
+    </div>
     <div class="context c1 ff_nhg">
       <p>Just a curious mind</p>
       <p>Who loves to code</p>
@@ -10,11 +15,6 @@
       <p>An explorer in the world of code</p>
       <p>Driven by curiosity</p>
       <p>And passion towards it</p>
-    </div>
-    <div class="menu-box" role="button" (click)="toggleMenu()">
-      <i *ngIf="!showMenu" class="fi fi-ss-menu-burger"></i>
-      <i *ngIf="showMenu" class="fi fi-ss-cross"></i>
-      <p class="ff_os">{{showMenu ? 'Close' : 'Menu '}}</p>
     </div>
   </header>
 
@@ -26,7 +26,6 @@
   <div class="bg-stripe" style="--hbgs: 5"></div>
 
   <app-menu *ngIf="showMenu"></app-menu>
-  <app-bulb></app-bulb>
 
   <div class="sidebar">
     <div class="social-icons">

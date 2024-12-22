@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-
 @font-face {
   font-family: "Giant-Robots";
   font-style: normal;
@@ -16,13 +14,28 @@
   font-style: normal;
   font-weight: normal;
   src: local("Neue Hass Grotesk"),
-    url("../fonts/neue-hass-grotesk.woff2") format("truetype");
+    url("../fonts/NeueHassGrotesk.woff2") format("truetype");
 }
 
 .ff_nhg {
   font-family: "Neue Hass Grotesk", sans-serif;
 }
 
-.ff_os {
-  font-family: "Open Sans", sans-serif;
+@font-face {
+  font-family: "Mori Book";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Mori Book"), url("../fonts/MoriBook.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Mori Book Bold";
+  font-style: bold;
+  src: local("Mori Book Bold"), url("../fonts/MoriBookBold.ttf") format("truetype");
+}
+
+.ff_mb {
+  font-family: "Mori Book", sans-serif;
+}
+.ff_mbb {
+  font-family: "Mori Book Bold", sans-serif;
 }

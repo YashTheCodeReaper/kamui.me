@@ -4,8 +4,24 @@ body.theme_default {
   --main-1: #000;
   --main-1a: #1c1c1c;
   --main-3: #fff;
-  --border-1: #222; 
-  --border-3: #e5e5e5; 
+  --border-1: #222;
+  --border-3: #e5e5e5;
+  --to-top-hide: linear-gradient(
+    to top,
+    black 0%,
+    rgba(0, 0, 0, 0.738) 19%,
+    rgba(0, 0, 0, 0.541) 34%,
+    rgba(0, 0, 0, 0.382) 47%,
+    rgba(0, 0, 0, 0.278) 56.5%,
+    rgba(0, 0, 0, 0.194) 65%,
+    rgba(0, 0, 0, 0.126) 73%,
+    rgba(0, 0, 0, 0.075) 80.2%,
+    rgba(0, 0, 0, 0.042) 86.1%,
+    rgba(0, 0, 0, 0.021) 91%,
+    rgba(0, 0, 0, 0.008) 95.2%,
+    rgba(0, 0, 0, 0.002) 98.2%,
+    transparent 100%
+  );
 }
 
 body.theme_light {
@@ -14,6 +30,6 @@ body.theme_light {
   --main-1: #fff;
   --main-1a: #f5f5f5;
   --main-3: #000;
-  --border-3: #222; 
-  --border-1: #e5e5e5; 
+  --border-3: #222;
+  --border-1: #e5e5e5;
 }

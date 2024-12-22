@@ -1,20 +1,98 @@
 .portfolio_section {
-    background-color: var(--main-1);
-    position: relative;
-    height: 300vh;
+  background-color: var(--main-1);
+  color: var(--main-3);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 3;
 
-    &::before{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 8rem;
-        background-image: linear-gradient(var(--main-1), transparent);
+  .ps_c {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+
+    .c {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      justify-content: center;
+      padding: 10rem;
+      overflow: hidden;
     }
 
-    canvas {
+    .left {
+      align-items: flex-end;
+      gap: 2rem;
+      text-align: right;
+      padding-right: 5rem;
+      padding-left: 20rem;
+
+      .scrub_container {
         width: 100%;
-        height: 100vh;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        background-color: var(--main-1);
+        color: var(--main-3);
+        padding: 1rem;
+
+        h1 {
+          width: max-content;
+          font-size: 15rem;
+          text-align: right;
+          word-break: keep-all;
+          line-height: 0.8;
+        }
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          mix-blend-mode: difference;
+        }
+      }
+
+      .wbi {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        h5 {
+          font-size: 1.2rem;
+          word-break: keep-all;
+          text-transform: uppercase;
+          width: 60rem;
+
+          span {
+            color: var(--main-2);
+          }
+        }
+
+        p {
+          font-size: 1.2rem;
+          padding-left: 10rem;
+        }
+      }
     }
+
+    .right {
+      align-items: center;
+      padding: 10rem 15rem;
+      overflow: hidden;
+    }
+  }
 }

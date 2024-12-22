@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';
-import { SplashComponent } from './splash/splash.component';
-import { LogoComponent } from './logo/logo.component';
 import { MenuComponent } from './menu/menu.component';
 import { UiService } from './services/ui.service';
 import { CommonModule } from '@angular/common';
@@ -14,8 +12,6 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
   standalone: true,
   imports: [
     HomeComponent,
-    SplashComponent,
-    LogoComponent,
     MenuComponent,
     CommonModule,
     BulbComponent,

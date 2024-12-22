@@ -9,11 +9,23 @@
   color: var(--main-3);
   overflow: hidden;
 
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10rem;
+    background: var(--to-top-hide);
+  }
+
   .short-video {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     right: 20rem;
+    z-index: 3;
 
     h5 {
       font-size: 1.6rem;
@@ -134,8 +146,7 @@
         -webkit-user-select: none;
       }
 
-
-      &:hover h1{
+      &:hover h1 {
         color: var(--main-2);
       }
     }
@@ -207,4 +218,18 @@
       background-color: var(--main-2);
     }
   }
+}
+
+#home-gradient-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
+  --gradient-color-1: var(--main-1);
+  --gradient-color-2: #4bebc6;
+  --gradient-color-3: var(--main-1);
+  --gradient-color-4: #784beb;
 }
