@@ -2,12 +2,13 @@ import { AfterViewInit, Component } from '@angular/core';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollerComponent } from "./scroller/scroller.component";
 declare var window: any;
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [],
+  imports: [ScrollerComponent],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.scss',
 })

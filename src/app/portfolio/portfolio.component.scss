@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  z-index: 3;
+  z-index: 4;
 
   .ps_c {
     width: 100%;
@@ -76,10 +76,6 @@
           word-break: keep-all;
           text-transform: uppercase;
           width: 60rem;
-
-          span {
-            color: var(--main-2);
-          }
         }
 
         p {
@@ -89,10 +85,28 @@
       }
     }
 
+    .left.rev {
+      align-items: flex-start;
+      text-align: left;
+      padding-left: 5rem;
+      padding-right: 20rem;
+    }
+
     .right {
       align-items: center;
-      padding: 10rem 15rem;
+      padding: 0;
       overflow: hidden;
+
+      img {
+        height: 80%;
+        width: auto;
+        rotate: 90deg;
+        margin-top: 100px;
+      }
     }
   }
+}
+
+span {
+  color: var(--main-2);
 }
