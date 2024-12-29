@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { gsap, Power4 } from 'gsap';
 import { BulbComponent } from "./bulb/bulb.component";
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { GalleryComponent } from "./gallery/gallery.component";
+import { AboutComponent } from './about/about.component';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +16,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
     HomeComponent,
     MenuComponent,
     CommonModule,
-    BulbComponent,
-    PortfolioComponent
+    AboutComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

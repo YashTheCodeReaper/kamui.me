@@ -1,0 +1,52 @@
+.gallery_section {
+  min-height: 500vh;
+  height: auto;
+  position: relative;
+  background-color: var(--main-1);
+  overflow: visible;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .gs_slide {
+    width: 100%;
+    z-index: 1;
+    background-color: var(--main-1a);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2rem;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    h5 {
+        font-size: 1rem;
+        font-weight: 100;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        font-size: 10rem;
+        font-weight: 1000;
+        line-height: 1;
+    }
+  }
+
+  .gss1 {
+    z-index: 1;
+  }
+
+  .gss2 {
+    z-index: 2;
+  }
+}
+
+span {
+    color: var(--main-2);
+}

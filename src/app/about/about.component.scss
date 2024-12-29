@@ -1,0 +1,92 @@
+.about_section {
+  height: 400vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: var(--main-1);
+  color: var(--main-3);
+
+  .as_slider_overlay {
+    display: flex;
+    height: 100vh;
+    width: 200vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .c {
+      width: max-content;
+      height: 100%;
+      display: flex;
+      position: relative;
+    }
+
+    .c1,
+    .c2 {
+      padding: 0 15rem;
+      padding-right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      h3 {
+        font-size: 5rem;
+        font-weight: 1000;
+        line-height: 1;
+        margin-top: -20rem;
+        z-index: 2;
+        mix-blend-mode: difference;
+
+        span {
+          color: var(--main-2);
+        }
+      }
+
+      p {
+        font-size: 2.4rem;
+        font-weight: 100;
+        margin-top: 40rem;
+        z-index: 2;
+        mix-blend-mode: difference;
+        margin-left: -10rem;
+        max-width: 60rem;
+
+        span {
+          color: var(--main-2);
+        }
+      }
+
+      img {
+        height: 40rem;
+        width: auto;
+        z-index: 1;
+        margin-left: -10rem;
+        // filter: grayscale(1);
+      }
+    }
+
+    .c2 {
+      padding: 0;
+      padding-left: 5rem;
+
+      .img_container {
+        width: 30rem;
+        height: 35rem;
+        overflow: hidden;
+        margin-top: -5rem;
+        margin-left: 5rem;
+        background-image: url("../../assets/images/about/darth_vader.png");
+        background-position: 50% 60%;
+        background-size: cover;
+      }
+
+      .ic1 {
+        width: 20rem;
+        height: 25rem;
+        background-image: url("../../assets/images/about/mando.jpeg");
+        margin-top: -15rem;
+      }
+    }
+  }
+}
