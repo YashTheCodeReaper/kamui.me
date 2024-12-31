@@ -1,108 +1,40 @@
 .portfolio_section {
   background-color: var(--main-1);
   color: var(--main-3);
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  z-index: 4;
+  position: relative;
+  overflow: hidden;
 
-  .ps_c {
-    width: 100%;
+  .c {
+    width: 100vw;
     height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 
-    .c {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      justify-content: center;
-      padding: 10rem;
-      overflow: hidden;
+    .bullet_path {
+      background-color: var(--main-3);
+      position: absolute;
+      width: 0.2rem;
+      height: 200vh;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
     }
 
-    .left {
-      align-items: flex-end;
-      gap: 2rem;
-      text-align: right;
-      padding-right: 5rem;
-      padding-left: 20rem;
-
-      .scrub_container {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        background-color: var(--main-1);
-        color: var(--main-3);
-        padding: 1rem;
-
-        h1 {
-          width: max-content;
-          font-size: 15rem;
-          text-align: right;
-          word-break: keep-all;
-          line-height: 0.8;
-        }
-
-        img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          mix-blend-mode: difference;
-        }
-      }
-
-      .wbi {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-
-        h5 {
-          font-size: 1.2rem;
-          word-break: keep-all;
-          text-transform: uppercase;
-          width: 60rem;
-        }
-
-        p {
-          font-size: 1.2rem;
-          padding-left: 10rem;
-        }
-      }
+    ng-lottie {
+      opacity: 0.65 !important;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
 
-    .left.rev {
-      align-items: flex-start;
-      text-align: left;
-      padding-left: 5rem;
-      padding-right: 20rem;
-    }
-
-    .right {
-      align-items: center;
-      padding: 0;
-      overflow: hidden;
-
-      img {
-        height: 80%;
-        width: auto;
-        rotate: 90deg;
-        margin-top: 100px;
-      }
+    h1 {
+      font-size: 7rem;
+      z-index: 3;
     }
   }
 }

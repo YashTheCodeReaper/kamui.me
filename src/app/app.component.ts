@@ -8,6 +8,7 @@ import { BulbComponent } from "./bulb/bulb.component";
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { GalleryComponent } from "./gallery/gallery.component";
 import { AboutComponent } from './about/about.component';
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,10 @@ import { AboutComponent } from './about/about.component';
     HomeComponent,
     MenuComponent,
     CommonModule,
-    AboutComponent
+    AboutComponent,
+    BulbComponent,
+    PortfolioComponent,
+    FooterComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
