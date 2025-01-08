@@ -1,7 +1,45 @@
 <section class="portfolio_section ff_nhg">
-  <div class="c c1">
-    <ng-lottie [options]="options" />
-    <h1 class="ff_nhg"><span>W</span>itness <span>M</span>y <span>J</span>ourney</h1>
-    <div class="bullet_path"></div>
+  <div class="ps_top">
+    <div class="pst_c">
+      <div class="left">
+        <h1>[{{ mySkills.length }}]</h1>
+        <h1 style="color: var(--main-2)">ALL</h1>
+      </div>
+      <div class="right">
+        <h3>FILTER SKILLS</h3>
+        <i role="button" class="fi fi-rs-plus"></i>
+      </div>
+    </div>
+    <div class="fpst"></div>
+  </div>
+  <div class="ps_body">
+    <div class="psb_gc">
+      <div class="psb_title_flex ff_mbb" *ngFor="let skill of mySkills">
+        <div class="psb_ovl"></div>
+        <h2>{{ skill.name }}</h2>
+        <div class="cat_flex">
+          <h2 class="ff_mb" *ngFor="let cat of skill.category">{{ cat }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="psb_gc psb_gc_left">
+      <div class="scrub_container">
+        <h1 [innerHTML]="mySkills[0].span"></h1>
+        <h1 style="align-self: flex-end" [innerHTML]="mySkills[0].span"></h1>
+        <h1 [innerHTML]="mySkills[0].span"></h1>
+        <h1 style="align-self: flex-end" [innerHTML]="mySkills[0].span"></h1>
+        <h1 [innerHTML]="mySkills[0].span"></h1>
+        <img src="assets/images/portfolio_sb.avif" alt="Scrub background" />
+      </div>
+      <div class="wbi">
+        <h5 class="ff_mbb" [innerHTML]="mySkills[0].spanSingle"></h5>
+        <p class="ff_mb">
+          A personal portfolio site made with simple HTML, CSS and JS. Framework
+          used is Angular. Used GSAP to animate stuffs. So what's so special
+          about it? Well, For a website that has much complexity in design,
+          there is a very minimal media query...say about 10 lines max!
+        </p>
+      </div>
+    </div>
   </div>
 </section>
