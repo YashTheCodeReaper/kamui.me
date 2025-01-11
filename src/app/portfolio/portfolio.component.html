@@ -14,7 +14,11 @@
   </div>
   <div class="ps_body">
     <div class="psb_gc">
-      <div class="psb_title_flex ff_mbb" *ngFor="let skill of mySkills">
+      <div
+        class="psb_title_flex ff_mbb"
+        *ngFor="let skill of mySkills; let i = index"
+        (mouseenter)="this.detailIndex = i"
+      >
         <div class="psb_ovl"></div>
         <h2>{{ skill.name }}</h2>
         <div class="cat_flex">
@@ -24,15 +28,31 @@
     </div>
     <div class="psb_gc psb_gc_left">
       <div class="scrub_container">
-        <h1 [innerHTML]="mySkills[0].span"></h1>
-        <h1 style="align-self: flex-end" [innerHTML]="mySkills[0].span"></h1>
-        <h1 [innerHTML]="mySkills[0].span"></h1>
-        <h1 style="align-self: flex-end" [innerHTML]="mySkills[0].span"></h1>
-        <h1 [innerHTML]="mySkills[0].span"></h1>
+        <h1 class="pfs_toleft" [innerHTML]="mySkills[detailIndex].span"></h1>
+        <h1
+          class="pfs_toright"
+          style="align-self: flex-end"
+          [innerHTML]="mySkills[detailIndex].span"
+        ></h1>
+        <h1 class="pfs_toleft" [innerHTML]="mySkills[detailIndex].span"></h1>
+        <h1
+          class="pfs_toright"
+          style="align-self: flex-end"
+          [innerHTML]="mySkills[detailIndex].span"
+        ></h1>
+        <h1 class="pfs_toleft" [innerHTML]="mySkills[detailIndex].span"></h1>
         <img src="assets/images/portfolio_sb.avif" alt="Scrub background" />
+        <img
+          class="skill_logo"
+          [src]="mySkills[detailIndex].imagePath"
+          [alt]="mySkills[detailIndex].spanSingle"
+        />
       </div>
       <div class="wbi">
-        <h5 class="ff_mbb" [innerHTML]="mySkills[0].spanSingle"></h5>
+        <h5
+          class="ff_mbb red"
+          [innerHTML]="mySkills[detailIndex].spanSingle"
+        ></h5>
         <p class="ff_mb">
           A personal portfolio site made with simple HTML, CSS and JS. Framework
           used is Angular. Used GSAP to animate stuffs. So what's so special
