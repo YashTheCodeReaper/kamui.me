@@ -3,7 +3,7 @@
   color: var(--main-3);
   position: relative;
   overflow: visible;
-  height: 230vh;
+  height: 180rem;
   padding: 10rem 0;
 
   .ps_body {
@@ -149,6 +149,7 @@
         p {
           font-size: 1.2rem;
           padding-left: 10rem;
+          text-align: end;
         }
       }
     }
