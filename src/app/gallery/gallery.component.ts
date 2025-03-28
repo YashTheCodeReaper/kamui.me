@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { gsap, Power0 } from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 @Component({
@@ -10,79 +10,52 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent implements AfterViewInit {
+  scrollGsapObj: any;
+
   ngAfterViewInit(): void {
     gsap.registerPlugin(ScrollTrigger);
-    const tl = gsap.timeline();
-    tl.fromTo(
-      '.gss1',
+
+    this.scrollGsapObj = gsap.fromTo(
+      '.gallery_tl_box',
       {
-        transform:
-          'translate(-25%, 110%) translate3d(0px, 0px, 0px) rotate(15deg)',
+        x: 0,
       },
       {
-        transform: 'translate(0%, 0%) translate3d(0px, 0px, 0px) rotate(0deg)',
+        x: '-400vw',
+        stagger: 2,
+        onUpdate: () => {
+          if (!this.scrollGsapObj?.ratio) return;
+
+          gsap.fromTo(
+            '.flex_content1',
+            {
+              x: 0,
+            },
+            {
+              x: this.scrollGsapObj.ratio * -1000,
+              duration: 0,
+            }
+          );
+
+          gsap.fromTo(
+            '.flex_content2',
+            {
+              x: 0,
+            },
+            {
+              x: this.scrollGsapObj.ratio * -4000,
+              duration: 0,
+            }
+          );
+        },
         scrollTrigger: {
+          pin: '.gallery_tl_box',
           trigger: '.gallery_section',
-          start: 'top bottom',
-          end: 'top 50%',
+          start: 'top top',
+          end: 'bottom bottom',
           scrub: true,
         },
       }
-    )
-      .fromTo(
-        '.gss1',
-        {
-          transform:
-            'translate(0%, 0%) translate3d(0px, 0px, 0px) rotate(0deg)',
-        },
-        {
-          transform:
-            'translate(-25%, -80%) translate3d(0px, 0px, 0px) rotate(-7deg)',
-          ease: Power0.easeInOut,
-          scrollTrigger: {
-            trigger: '.gss1',
-            start: 'top 35%',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      )
-      .fromTo(
-        '.gss2',
-        {
-          transform:
-            'translate(15%, 110%) translate3d(0px, 0px, 0px) rotate(15deg)',
-        },
-        {
-          transform:
-            'translate(0%, 0%) translate3d(0px, 0px, 0px) rotate(0deg)',
-          scrollTrigger: {
-            trigger: '.gss1',
-            start: 'top 40%',
-            end: 'top 5%',
-            scrub: true,
-          },
-        }
-      )
-      .fromTo(
-        '.gss2',
-        {
-          transform:
-            'translate(0%, 0%) translate3d(0px, 0px, 0px) rotate(0deg)',
-        },
-        {
-          transform:
-            'translate(-25%, -80%) translate3d(0px, 0px, 0px) rotate(-7deg)',
-          ease: Power0.easeInOut,
-          scrollTrigger: {
-            trigger: '.gss2',
-            start: 'top top',
-            end: 'bottom 50%',
-            scrub: true,
-          },
-        }
-      );
-
-    ScrollTrigger.refresh();
+    );
   }
 }

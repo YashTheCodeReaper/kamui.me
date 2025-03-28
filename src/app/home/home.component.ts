@@ -4,6 +4,7 @@ import { gsap, Power3 } from 'gsap';
 import { BulbComponent } from '../bulb/bulb.component';
 
 declare var Gradient: any;
+declare var document: any;
 
 @Component({
   selector: 'app-home',
@@ -95,6 +96,19 @@ export class HomeComponent implements AfterViewInit {
       }, 10000);
     } catch (ex) {
       console.error(ex);
+    }
+  }
+
+  onToggleVideo(reveal: boolean): void {
+    try {
+      document.querySelectorAll('.vc_bg').forEach((el: any) => {
+        if(!reveal) el.style.height = '100%'
+        else el.style.height = '0%'
+      })
+      document.getElementById('body')?.classList.toggle('theme_default');
+      document.querySelector('#home-gradient-canvas').style.opacity = reveal ? 0 : 1;
+    } catch (ex) {
+      console.error(ex)
     }
   }
 }

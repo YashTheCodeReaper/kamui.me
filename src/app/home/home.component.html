@@ -26,11 +26,26 @@
   </div>
   <div class="short-video ff_nhg">
     <h5>Watch the video</h5>
-    <div class="watch-button" role="button">
+    <div class="watch-button" role="button" (mouseenter)="onToggleVideo(true)" (mouseleave)="onToggleVideo(false)">
       <h2>Watch</h2>
       <i class="fi fi-ss-play-circle"></i>
     </div>
     <div class="border"></div>
   </div>
-  <!-- <canvas id="home-gradient-canvas" data-transition-in ></canvas> -->
+  <div class="video_flex">
+    <video src="assets/videos/vader.mp4" muted autoplay loop [controls]="false"></video>
+    <div class="video_cover">
+      <div class="vc_bg"></div>
+    </div>
+    <div class="video_cover">
+      <div class="vc_bg"></div>
+    </div>
+    <div class="video_cover">
+      <div class="vc_bg"></div>
+    </div>
+    <div class="video_cover">
+      <div class="vc_bg"></div>
+    </div>
+  </div>
+  <canvas id="home-gradient-canvas" data-transition-in ></canvas>
 </section>

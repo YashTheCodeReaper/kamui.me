@@ -6,9 +6,10 @@ import { CommonModule } from '@angular/common';
 import { gsap, Power4 } from 'gsap';
 import { BulbComponent } from "./bulb/bulb.component";
 import { PortfolioComponent } from './portfolio/portfolio.component';
-import { GalleryComponent } from "./gallery/gallery.component";
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from "./footer/footer.component";
+import { TestimonialsComponent } from "./testimonials/testimonials.component";
+import { GalleryComponent } from "./gallery/gallery.component";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,9 @@ import { FooterComponent } from "./footer/footer.component";
     AboutComponent,
     BulbComponent,
     PortfolioComponent,
-    FooterComponent
+    FooterComponent,
+    TestimonialsComponent,
+    GalleryComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
