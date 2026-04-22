@@ -10,6 +10,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent implements AfterViewInit {
+  isVisible = true;
+
   ngAfterViewInit(): void {
     gsap.registerPlugin(ScrollTrigger);
     gsap.fromTo(
@@ -27,5 +29,23 @@ export class FooterComponent implements AfterViewInit {
         },
       }
     );
+  }
+
+  toggleFooter(): void {
+    this.isVisible = !this.isVisible;
+    
+    if (this.isVisible) {
+      gsap.to('.footer_section', {
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    } else {
+      gsap.to('.footer_section', {
+        y: '100%',
+        duration: 0.6,
+        ease: 'power2.in'
+      });
+    }
   }
 }

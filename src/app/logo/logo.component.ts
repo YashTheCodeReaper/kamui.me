@@ -34,7 +34,7 @@ export class LogoComponent implements AfterViewInit {
 
       const texture = new THREE.TextureLoader().load(
         `assets/images/${
-          document.body.classList.contains('theme_default') ? 'oly_1.svg' : 'oly_2.svg'
+          document.body.classList.contains('theme_default') ? 'logo_dark.svg' : 'logo_light.svg'
         }`
       );
       texture.colorSpace = THREE.SRGBColorSpace;

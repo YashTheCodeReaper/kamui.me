@@ -6,6 +6,36 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  transform: translateY(0);
+  transition: transform 0.6s ease;
+
+  .toggle-button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--main-2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    i {
+      font-size: 1.8rem;
+      color: var(--main-1);
+      transition: transform 0.3s ease;
+    }
+  }
 
   .fs_flex {
     width: 100%;

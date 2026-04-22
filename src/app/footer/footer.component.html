@@ -1,4 +1,7 @@
 <footer class="footer_section ff_nhg">
+    <div class="toggle-button" (click)="toggleFooter()">
+        <i class="fi" [class.fi-ss-chevron-down]="isVisible" [class.fi-ss-chevron-up]="!isVisible"></i>
+    </div>
     <div class="fs_flex">
         <div class="fsf_top">
             <div class="header_flex">
