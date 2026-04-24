@@ -1,48 +1,14 @@
 <div class="main">
-  <header [ngClass]="{ dark_class: showMenu }">
-    <h3 class="ff_gr">KAMUI.<span>me</span></h3>
-    <div class="menu-box" role="button" (click)="toggleMenu()">
-      <i *ngIf="!showMenu" class="fi fi-ss-menu-burger"></i>
-      <i *ngIf="showMenu" class="fi fi-ss-cross"></i>
-      <p class="ff_mb">{{showMenu ? 'Close' : 'Menu '}}</p>
-    </div>
-    <div class="context c1 ff_mb">
-      <p>Just a curious mind</p>
-      <p>Who loves to code</p>
-      <p>And finds joy in the results</p>
-    </div>
-    <div class="context c2 ff_mb">
-      <p>An explorer in the world of code</p>
-      <p>Driven by curiosity</p>
-      <p>And passion towards it</p>
-    </div>
-  </header>
+  <app-header [menuOpen]="menuOpen()" (toggle)="toggleMenu()"></app-header>
 
   <app-bulb></app-bulb>
 
-  <!-- <div class="bg-stripe" style="--hbgs: 0"></div>
-  <div class="bg-stripe" style="--hbgs: 1"></div>
-  <div class="bg-stripe" style="--hbgs: 2"></div>
-  <div class="bg-stripe" style="--hbgs: 3"></div>
-  <div class="bg-stripe" style="--hbgs: 4"></div>
-  <div class="bg-stripe" style="--hbgs: 5"></div> -->
+  @if (menuOpen()) {
+    <app-menu></app-menu>
+  }
 
-  <app-menu *ngIf="showMenu"></app-menu>
+  <app-sidebar></app-sidebar>
 
-  <div class="sidebar">
-    <div class="social-icons">
-      <i class="fi fi-brands-instagram"></i>
-      <i class="fi fi-brands-discord"></i>
-      <i class="fi fi-brands-linkedin"></i>
-    </div>
-  </div>
-  <!-- <app-splash></app-splash> -->
   <app-home></app-home>
   <app-about></app-about>
-  <!-- <app-portfolio></app-portfolio>
-  <app-gallery></app-gallery>
-  <app-testimonials></app-testimonials> -->
-   <!-- <app-gallery></app-gallery> -->
-  <!-- <app-logo></app-logo> -->
-   <!-- <app-footer></app-footer> -->
 </div>

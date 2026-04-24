@@ -1,0 +1,39 @@
+<section class="menu_section">
+  <div class="ms_c">
+    <div class="enc"></div>
+  </div>
+
+  @for (item of items; track item.label) {
+    <div class="ms_c">
+      <div class="enc">
+        <h1 role="button" class="ff_nhg" [class.active]="item.active">{{ item.label }}</h1>
+      </div>
+    </div>
+  }
+
+  <div class="ms_c ff_nhg">
+    <div class="enc">
+      @for (action of miniActions; track action.title) {
+        <div class="mini_buttons" role="button">
+          @if (action.label && action.href) {
+            <p>{{ action.title }}</p>
+            <a [href]="action.href">{{ action.label }}</a>
+          } @else {
+            <h4>{{ action.title }}</h4>
+          }
+          <div class="border"></div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="ms_c null">
+    <div class="enc">
+      <div class="social_icons">
+        @for (link of socialLinks; track link.platform) {
+          <i [class]="link.iconClass" [attr.aria-label]="link.platform"></i>
+        }
+      </div>
+    </div>
+  </div>
+</section>

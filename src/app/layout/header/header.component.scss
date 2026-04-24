@@ -1,0 +1,74 @@
+:host {
+  display: contents;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  * {
+    transition: all 300ms ease;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 100;
+
+    span {
+      color: var(--main-2);
+    }
+  }
+
+  .menu-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    i {
+      height: 2.5rem;
+      font-size: 2.4rem;
+    }
+
+    p {
+      font-size: 1em;
+      font-weight: 500;
+    }
+  }
+
+  .context {
+    position: absolute;
+    top: 4rem;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    &.c1 {
+      left: 50vw;
+    }
+
+    &.c2 {
+      right: 30rem;
+    }
+  }
+}
+
+:host-context(.dark_class),
+header.dark_class {
+  color: var(--main-1);
+}

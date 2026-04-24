@@ -1,113 +1,34 @@
 .home_section {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   color: var(--main-3);
-  overflow: hidden;
-
-  .video_flex {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    opacity: 0.75;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-
-    video {
-      object-fit: cover;
-      height: 100%;
-      width: auto;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-
-    .video_cover {
-      width: 100%;
-      z-index: 2;
-      height: 25%;
-      transition: all 300ms ease;
-      overflow: hidden;
-      position: relative;
-
-      .vc_bg {
-        width: 100%;
-        height: 100%;
-        transition: all 300ms ease;
-        background-color: var(--main-1);
-        position: absolute;
-        bottom: 0;
-        left: 0;
-      }
-    }
-  }
 
   &::before {
     content: "";
     position: absolute;
-    z-index: 1;
-    left: 0;
     bottom: 0;
+    left: 0;
+    z-index: 1;
     width: 100%;
     height: 10rem;
     background: var(--to-top-hide);
   }
 
-  .short-video {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 20rem;
-    z-index: 3;
-
-    h5 {
-      font-size: 1.6rem;
-    }
-
-    .border {
-      height: 0.35rem;
-      width: 100%;
-      background-color: var(--main-2);
-    }
-
-    .watch-button {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 0.5rem;
-
-      h2 {
-        font-size: 3rem;
-        font-weight: 100;
-      }
-
-      i {
-        font-size: 2.4rem;
-        margin-top: 0.5rem;
-      }
-    }
-  }
-
   .hs_tilter {
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
-    translate: -50% -50%;
-    overflow: hidden;
     z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    translate: -50% -50%;
 
     .hs {
       position: absolute;
@@ -117,14 +38,14 @@
       overflow: hidden;
 
       .hs_enc {
-        width: 100vw;
-        height: 100vh;
         position: absolute;
         top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
         transform-style: preserve-3d;
 
         app-logo {
@@ -137,10 +58,7 @@
       left: 0;
       width: 100%;
 
-      .hs_enc {
-        left: 0;
-        // background-color: var(--main-1);
-      }
+      .hs_enc { left: 0; }
     }
 
     .hs2 {
@@ -154,17 +72,61 @@
     }
   }
 
+  .video_flex {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.75;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: auto;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video_cover {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 25%;
+      overflow: hidden;
+      transition: all 300ms ease;
+
+      .vc_bg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--main-1);
+        transition: all 300ms ease;
+      }
+    }
+  }
+
   .feature-slider {
     position: absolute;
     bottom: 4rem;
     left: 20rem;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 3rem;
     overflow: hidden;
-    z-index: 3;
 
     .feature-content-flex {
       display: flex;
@@ -173,9 +135,9 @@
       justify-content: flex-start;
 
       h5 {
+        margin-bottom: 3rem;
         font-size: 1.1rem;
         font-weight: 500;
-        margin-bottom: 3rem;
         transform: translateX(-50rem);
       }
 
@@ -183,11 +145,10 @@
         font-size: 6rem;
         font-weight: 1000;
         line-height: 0.8;
-        transform: translateX(-50rem);
         cursor: pointer;
-        transition: color 300ms ease;
         user-select: none;
-        -webkit-user-select: none;
+        transform: translateX(-50rem);
+        transition: color 300ms ease;
       }
 
       &:hover h1 {
@@ -201,18 +162,16 @@
       justify-content: flex-start;
       gap: 1rem;
 
-      * {
-        transition: all 300ms ease;
-      }
+      * { transition: all 300ms ease; }
 
       .si {
-        background-color: var(--main-3);
-        height: 0.2rem;
+        position: relative;
         width: 6rem;
+        height: 0.2rem;
         border-radius: 5rem;
+        background-color: var(--main-3);
         opacity: 0.2;
         overflow: hidden;
-        position: relative;
 
         &::before {
           content: "";
@@ -223,13 +182,13 @@
           height: 100%;
           background-color: var(--main-2);
         }
-      }
 
-      .si.active {
-        opacity: 1;
+        &.active {
+          opacity: 1;
 
-        &::before {
-          animation: h_slider-active ease-out 12s;
+          &::before {
+            animation: h_slider-active ease-out 12s;
+          }
         }
       }
     }
@@ -239,26 +198,52 @@
     position: absolute;
     bottom: 8rem;
     right: 2rem;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    z-index: 3;
 
-    p {
-      font-size: 1.2rem;
-      font-weight: 400;
+    p { font-size: 1.2rem; font-weight: 400; }
+    h5 { font-size: 1.6rem; font-weight: 400; }
+
+    .border {
+      width: 70%;
+      height: 0.25rem;
+      margin-top: 0.15rem;
+      background-color: var(--main-2);
     }
+  }
 
-    h5 {
-      font-size: 1.6rem;
-      font-weight: 400;
+  .short-video {
+    position: absolute;
+    top: 50%;
+    right: 20rem;
+    z-index: 3;
+    transform: translateY(-50%);
+
+    h5 { font-size: 1.6rem; }
+
+    .watch-button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+
+      h2 {
+        font-size: 3rem;
+        font-weight: 100;
+      }
+
+      i {
+        margin-top: 0.5rem;
+        font-size: 2.4rem;
+      }
     }
 
     .border {
-      height: 0.25rem;
-      width: 70%;
-      margin-top: 0.15rem;
+      width: 100%;
+      height: 0.35rem;
       background-color: var(--main-2);
     }
   }
@@ -272,9 +257,10 @@
   width: 100%;
   height: 100%;
   opacity: 0.9;
+  transition: opacity 300ms ease;
+
   --gradient-color-1: var(--main-1);
   --gradient-color-2: #4bebc6;
   --gradient-color-3: var(--main-1);
   --gradient-color-4: #784beb;
-  transition: opacity 300ms ease;
 }

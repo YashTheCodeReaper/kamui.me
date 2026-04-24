@@ -1,58 +1,48 @@
-import { Component } from '@angular/core';
-import { HomeComponent } from './home/home.component';
-import { MenuComponent } from './menu/menu.component';
-import { UiService } from './services/ui.service';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { gsap, Power4 } from 'gsap';
-import { BulbComponent } from "./bulb/bulb.component";
-import { PortfolioComponent } from './portfolio/portfolio.component';
-import { AboutComponent } from './about/about.component';
-import { FooterComponent } from "./footer/footer.component";
-import { TestimonialsComponent } from "./testimonials/testimonials.component";
-import { GalleryComponent } from "./gallery/gallery.component";
+
+import { AboutComponent } from './features/about/about.component';
+import { HomeComponent } from './features/home/home.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { MenuComponent } from './layout/menu/menu.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { BulbComponent } from './shared/components/bulb/bulb.component';
+
+const MENU_CLOSE_DURATION_SECONDS = 0.5;
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    HomeComponent,
+    HeaderComponent,
+    SidebarComponent,
     MenuComponent,
-    CommonModule,
-    AboutComponent,
     BulbComponent,
-    PortfolioComponent,
-    FooterComponent,
-    TestimonialsComponent,
-    GalleryComponent
-],
+    HomeComponent,
+    AboutComponent,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  public showMenu: boolean = false;
+  protected readonly menuOpen = signal(false);
 
-  constructor(private uiService: UiService) {}
-
-  toggleMenu(): void {
-    try {
-      if (this.showMenu) {
-        gsap.to('.enc', {
-          top: 'unset',
-          bottom: '0',
-          duration: 0,
-          ease: Power4.easeIn,
-        });
-        gsap.to('.enc', {
-          height: '0%',
-          duration: 0.5,
-          ease: Power4.easeIn,
-        });
-        setTimeout(() => {
-          this.showMenu = false;
-        }, 500);
-      } else this.showMenu = !this.showMenu;
-    } catch (ex) {
-      console.error(ex);
+  protected toggleMenu(): void {
+    if (!this.menuOpen()) {
+      this.menuOpen.set(true);
+      return;
     }
+    this.closeMenu();
+  }
+
+  private closeMenu(): void {
+    gsap.set('.enc', { top: 'unset', bottom: 0 });
+    gsap.to('.enc', {
+      height: '0%',
+      duration: MENU_CLOSE_DURATION_SECONDS,
+      ease: Power4.easeIn,
+      onComplete: () => this.menuOpen.set(false),
+    });
   }
 }

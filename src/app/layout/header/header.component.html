@@ -1,0 +1,24 @@
+<header [ngClass]="{ dark_class: menuOpen() }">
+  <h3 class="ff_gr">KAMUI.<span>me</span></h3>
+
+  <div class="menu-box" role="button" (click)="onToggle()">
+    @if (menuOpen()) {
+      <i class="fi fi-ss-cross"></i>
+    } @else {
+      <i class="fi fi-ss-menu-burger"></i>
+    }
+    <p class="ff_mb">{{ menuOpen() ? 'Close' : 'Menu' }}</p>
+  </div>
+
+  <div class="context c1 ff_mb">
+    @for (line of leftIntroLines; track line) {
+      <p>{{ line }}</p>
+    }
+  </div>
+
+  <div class="context c2 ff_mb">
+    @for (line of rightIntroLines; track line) {
+      <p>{{ line }}</p>
+    }
+  </div>
+</header>

@@ -1,0 +1,126 @@
+import { DOCUMENT } from '@angular/common';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
+import { gsap, Power3 } from 'gsap';
+
+import { FEATURE_SLIDES } from './data/feature-slides';
+import { MaskScene } from './scenes/mask-scene';
+
+declare const Gradient: new () => { initGradient(selector: string): void };
+
+const GRADIENT_SELECTOR = '#home-gradient-canvas';
+const MASK_MODEL_PATH = 'assets/models/samumask.glb';
+const SLIDE_INTERVAL_MS = 12_000;
+const SLIDE_EXIT_DELAY_MS = 10_000;
+const SLIDE_OFFSCREEN = '-50rem';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
+})
+export class HomeComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('sceneHost', { static: true }) private readonly sceneHost!: ElementRef<HTMLElement>;
+
+  private readonly document = inject(DOCUMENT);
+
+  protected readonly slides = FEATURE_SLIDES;
+  protected readonly activeIndex = signal(0);
+  protected readonly activeSlide = computed(() => this.slides[this.activeIndex()]);
+
+  private maskScene?: MaskScene;
+  private cycleTimer?: ReturnType<typeof setInterval>;
+  private exitTimer?: ReturnType<typeof setTimeout>;
+  private gradient?: { initGradient(selector: string): void };
+
+  ngAfterViewInit(): void {
+    this.initBackgroundGradient();
+    this.initSlider();
+    this.initMaskScene();
+  }
+
+  ngOnDestroy(): void {
+    if (this.cycleTimer) clearInterval(this.cycleTimer);
+    if (this.exitTimer) clearTimeout(this.exitTimer);
+    this.maskScene?.dispose();
+  }
+
+  @HostListener('window:mousemove', ['$event'])
+  protected onPointerMove(event: MouseEvent): void {
+    this.maskScene?.setPointer(event.clientX, event.clientY);
+  }
+
+  protected onVideoHover(reveal: boolean): void {
+    this.document.querySelectorAll<HTMLElement>('.vc_bg').forEach(el => {
+      el.style.height = reveal ? '0%' : '100%';
+    });
+    this.document.body.classList.toggle('theme_default');
+
+    const canvas = this.document.querySelector<HTMLElement>(GRADIENT_SELECTOR);
+    if (canvas) canvas.style.opacity = reveal ? '0' : '1';
+  }
+
+  private initBackgroundGradient(): void {
+    this.gradient = new Gradient();
+    this.gradient.initGradient(GRADIENT_SELECTOR);
+  }
+
+  private initMaskScene(): void {
+    this.maskScene = new MaskScene(this.sceneHost.nativeElement);
+    this.maskScene.load(MASK_MODEL_PATH).catch(err => console.error('[MaskScene] load failed', err));
+    this.maskScene.start();
+  }
+
+  private initSlider(): void {
+    this.showSlide(this.activeIndex());
+    this.cycleTimer = setInterval(() => this.advanceSlide(), SLIDE_INTERVAL_MS);
+  }
+
+  private advanceSlide(): void {
+    const previous = this.activeIndex();
+    const next = (previous + 1) % this.slides.length;
+    this.setIndicator(previous, false);
+    this.activeIndex.set(next);
+    this.showSlide(next);
+  }
+
+  private showSlide(index: number): void {
+    this.setIndicator(index, true);
+    this.animateHeadlineIn();
+    if (this.exitTimer) clearTimeout(this.exitTimer);
+    this.exitTimer = setTimeout(() => this.animateHeadlineOut(), SLIDE_EXIT_DELAY_MS);
+  }
+
+  private setIndicator(index: number, active: boolean): void {
+    const indicator = this.document.querySelector(`.si${index + 1}`);
+    if (active) indicator?.classList.add('active');
+    else indicator?.classList.remove('active');
+  }
+
+  private animateHeadlineIn(): void {
+    const base = { transform: 'translateX(0%)', ease: Power3.easeOut, duration: 1.5 };
+    gsap.to('.fcf-h5',  { ...base, delay: 1.5 });
+    gsap.to('.fcf-h11', { ...base, delay: 0.5 });
+    gsap.to('.fcf-h12', { ...base, delay: 0.75 });
+  }
+
+  private animateHeadlineOut(): void {
+    const base = { transform: `translateX(${SLIDE_OFFSCREEN})`, ease: Power3.easeInOut, duration: 1.5 };
+    gsap.to('.fcf-h5',  { ...base, delay: 0 });
+    gsap.to('.fcf-h11', { ...base, delay: 0.5 });
+    gsap.to('.fcf-h12', { ...base, delay: 0.75 });
+  }
+}

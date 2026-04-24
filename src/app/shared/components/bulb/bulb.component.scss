@@ -1,0 +1,115 @@
+$swing-duration: 3s;
+$flash-duration: 2s;
+$bulb-glow: 0 0 15rem 7.5rem var(--main-2);
+$bulb-off: 0 0 0 0 transparent;
+
+.bulb-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 20rem;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top;
+  scale: 0.5;
+  animation: swing $swing-duration ease-in-out infinite;
+}
+
+.wire {
+  position: relative;
+  z-index: 1;
+  width: 0.4rem;
+  height: 25rem;
+  background: var(--main-3);
+}
+
+.connector {
+  z-index: 2;
+  width: 3rem;
+  aspect-ratio: 4 / 5;
+  border-radius: 1px;
+  background: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.grove {
+  z-index: 3;
+  width: 3.5rem;
+  height: 0.3rem;
+  background: #1c1c1c;
+}
+
+.bulb {
+  z-index: 1;
+  margin-top: -0.2rem;
+  width: 9rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--main-3);
+  background: var(--main-2);
+  box-shadow: $bulb-glow;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  &.active {
+    animation: flash $flash-duration linear forwards;
+  }
+
+  &.inactive {
+    animation: flash $flash-duration linear forwards reverse;
+  }
+}
+
+.metal-wire {
+  position: relative;
+  z-index: 2;
+  width: 2.2rem;
+  height: 1.1rem;
+  border: 0.1rem solid var(--main-1);
+  border-radius: 50%;
+
+  &:nth-child(1) { top: -0.1rem; }
+  &:nth-child(2) { top: -0.7rem; }
+  &:nth-child(3) { top: -1.3rem; }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(7deg); }
+  50%      { transform: rotate(-7deg); }
+}
+
+@keyframes flash {
+  0%      { background: var(--main-1a); box-shadow: $bulb-off; }
+  1%      { background: var(--main-2);  box-shadow: $bulb-glow; }
+  1.001%  { background: var(--main-1a); box-shadow: $bulb-off; }
+  10%     { background: var(--main-1a); box-shadow: $bulb-off; }
+  11.001% { background: var(--main-2);  box-shadow: $bulb-glow; }
+  11.002% { background: var(--main-1a); box-shadow: $bulb-off; }
+  12%     { background: var(--main-2);  box-shadow: $bulb-glow; }
+  39.999% { background: var(--main-2);  box-shadow: $bulb-glow; }
+  40%     { background: var(--main-1a); box-shadow: $bulb-off; }
+  41%     { background: var(--main-2);  box-shadow: $bulb-glow; }
+  41.001% { background: var(--main-1a); box-shadow: $bulb-off; }
+  75%     { background: var(--main-1a); box-shadow: $bulb-off; }
+  75.5%   { background: var(--main-2);  box-shadow: $bulb-glow; }
+  75.501% { background: var(--main-1a); box-shadow: $bulb-off; }
+  80%     { background: var(--main-1a); box-shadow: $bulb-off; }
+  81.001% { background: var(--main-2);  box-shadow: $bulb-glow; }
+  81.002% { background: var(--main-1a); box-shadow: $bulb-off; }
+  82%     { background: var(--main-2);  box-shadow: $bulb-glow; }
+  82.002% { background: var(--main-1a); box-shadow: $bulb-off; }
+  83%     { background: var(--main-2);  box-shadow: $bulb-glow; }
+  83.001% { background: var(--main-1a); box-shadow: $bulb-off; }
+  83.002% { background: var(--main-2);  box-shadow: $bulb-glow; }
+  83.003% { background: var(--main-1a); box-shadow: $bulb-off; }
+  88%     { background: var(--main-2);  box-shadow: $bulb-glow; }
+}

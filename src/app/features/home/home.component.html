@@ -1,0 +1,51 @@
+<section class="home_section">
+  <div class="hs_tilter">
+    <div class="hs hs1">
+      <div #sceneHost class="hs_enc"></div>
+    </div>
+  </div>
+
+  <div class="feature-slider">
+    <div class="feature-content-flex ff_nhg">
+      <h5 class="fcf-h5">{{ activeSlide().title }}</h5>
+      <h1 class="fcf-h11">{{ activeSlide().headingLine1 }}</h1>
+      <h1 class="fcf-h12">{{ activeSlide().headingLine2 }}</h1>
+    </div>
+    <div class="slider-indicator-flex">
+      @for (slide of slides; let i = $index; track slide.title) {
+        <div class="si si{{ i + 1 }}"></div>
+      }
+    </div>
+  </div>
+
+  <div class="attribute ff_nhg">
+    <p>Website by</p>
+    <h5>Yashwanth</h5>
+    <div class="border"></div>
+  </div>
+
+  <div class="short-video ff_nhg">
+    <h5>Watch the video</h5>
+    <div
+      class="watch-button"
+      role="button"
+      (mouseenter)="onVideoHover(true)"
+      (mouseleave)="onVideoHover(false)"
+    >
+      <h2>Watch</h2>
+      <i class="fi fi-ss-play-circle"></i>
+    </div>
+    <div class="border"></div>
+  </div>
+
+  <div class="video_flex">
+    <video src="assets/videos/vader.mp4" muted autoplay loop [controls]="false"></video>
+    @for (_ of [0, 1, 2, 3]; track $index) {
+      <div class="video_cover">
+        <div class="vc_bg"></div>
+      </div>
+    }
+  </div>
+
+  <canvas id="home-gradient-canvas" data-transition-in></canvas>
+</section>
