@@ -107,7 +107,7 @@ export class AboutComponent implements AfterViewInit {
           trigger: '.about_section',
           pin: '.as_slider_overlay',
           start: 'top top',
-          scrub: true,
+          scrub: 1,
           end: 'bottom bottom',
         },
       }
