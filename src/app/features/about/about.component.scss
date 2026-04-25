@@ -1,6 +1,6 @@
 .about_section {
   position: relative;
-  height: 400vh;
+  height: 400dvh;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -11,8 +11,8 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    min-width: 200vw;
-    height: 100vh;
+    min-width: 200dvw;
+    height: 100dvh;
 
     .c {
       position: relative;

@@ -3,23 +3,23 @@
   color: var(--main-3);
   position: relative;
   overflow: hidden;
-  height: 1000vh;
+  height: 1000dvh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 
   .gallery_tl_box {
-    min-width: 500vw;
+    min-width: 500dvw;
     width: auto;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 
     .dummy_box {
       height: 100%;
-      width: 75vw;
+      width: 75dvw;
     }
 
     .gallery_flex {

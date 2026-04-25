@@ -10,7 +10,10 @@ import {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { ModelScene, createSilhouetteDecorator } from '../../shared/three/model-scene';
+import {
+  ModelScene,
+  createSilhouetteDecorator,
+} from '../../shared/three/model-scene';
 import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
 
 const SECTION_SELECTOR = '.designation_section';
@@ -27,7 +30,8 @@ const SILHOUETTE_COLOUR = 0x2d2d2d;
   styleUrl: './designation.component.scss',
 })
 export class DesignationComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('sceneHost', { static: true }) private readonly sceneHost!: ElementRef<HTMLElement>;
+  @ViewChild('sceneHost', { static: true })
+  private readonly sceneHost!: ElementRef<HTMLElement>;
 
   private scene?: ModelScene;
   private headlineTween?: gsap.core.Tween;
@@ -64,7 +68,9 @@ export class DesignationComponent implements AfterViewInit, OnDestroy {
 
     this.scene
       .load(SAMURAI_MODEL_PATH)
-      .catch(err => console.error('[DesignationComponent] samurai load failed', err));
+      .catch((err) =>
+        console.error('[DesignationComponent] samurai load failed', err),
+      );
     this.scene.start();
   }
 

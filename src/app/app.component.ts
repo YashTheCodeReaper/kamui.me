@@ -9,6 +9,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BulbComponent } from './shared/components/bulb/bulb.component';
 import { DesignationComponent } from './features/designation/designation.component';
 import { SkillsComponent } from './features/skills/skills.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { QuoteComponent } from "./features/quote/quote.component";
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
 
@@ -23,7 +25,9 @@ const MENU_CLOSE_DURATION_SECONDS = 0.5;
     HomeComponent,
     AboutComponent,
     SkillsComponent,
-    DesignationComponent
+    DesignationComponent,
+    FooterComponent,
+    QuoteComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',

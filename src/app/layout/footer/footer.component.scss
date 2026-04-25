@@ -1,0 +1,114 @@
+footer {
+  width: 100dvw;
+  height: 100dvh;
+  background-color: var(--main-3);
+  position: relative;
+  color: var(--main-1);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem;
+  overflow: hidden;
+
+  img {
+    opacity: 0.1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    height: 80dvh;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+  }
+
+  .footer_top {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .ft_left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      max-width: 30%;
+      gap: 2rem;
+    }
+
+    .ff_right {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 5rem;
+
+      .ffr_left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        h4 {
+          font-size: 5rem;
+          font-weight: 1000;
+          line-height: 1;
+
+          span {
+            color: var(--main-2);
+          }
+        }
+      }
+
+      .ffr_right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        .ffrr_box {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 0.5rem;
+
+          p {
+            font-size: 1.4rem;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+
+  .footer_extra {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .kamui_foot {
+    position: absolute;
+    bottom: 5rem;
+    right: 5rem;
+
+    h1 {
+      font-size: 24rem;
+      font-weight: 1000;
+      line-height: 1;
+      text-transform: uppercase;
+
+      span {
+        color: var(--main-2);
+      }
+    }
+  }
+}

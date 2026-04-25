@@ -1,4 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Seaweed+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Seaweed+Script&display=swap");
+
+.ff_tp {
+  font-family: "The Patience", sans-serif;
+}
+
+@font-face {
+  font-family: "The Patience";
+  src: url("../fonts/ThePatience.otf") format("opentype");
+  font-style: normal;
+  font-weight: normal;
+}
 
 .ff_sws {
   font-family: "Seaweed Script", serif;
@@ -8,7 +19,9 @@
   font-family: "Giant-Robots";
   font-style: normal;
   font-weight: normal;
-  src: local("Giant-Robots"), url("../fonts/GiantRobots.ttf") format("truetype");
+  src:
+    local("Giant-Robots"),
+    url("../fonts/GiantRobots.ttf") format("truetype");
 }
 
 .ff_gr {
@@ -19,7 +32,8 @@
   font-family: "Neue Hass Grotesk";
   font-style: normal;
   font-weight: normal;
-  src: local("Neue Hass Grotesk"),
+  src:
+    local("Neue Hass Grotesk"),
     url("../fonts/NeueHassGrotesk.woff2") format("truetype");
 }
 
@@ -31,12 +45,16 @@
   font-family: "Mori Book";
   font-style: normal;
   font-weight: normal;
-  src: local("Mori Book"), url("../fonts/MoriBook.ttf") format("truetype");
+  src:
+    local("Mori Book"),
+    url("../fonts/MoriBook.ttf") format("truetype");
 }
 @font-face {
   font-family: "Mori Book Bold";
   font-style: bold;
-  src: local("Mori Book Bold"), url("../fonts/MoriBookBold.ttf") format("truetype");
+  src:
+    local("Mori Book Bold"),
+    url("../fonts/MoriBookBold.ttf") format("truetype");
 }
 
 .ff_mb {
