@@ -1,0 +1,32 @@
+<section class="skills_section">
+  <div class="ss_box ss_left_box">
+    <img
+      src="assets/images/skills/sticker.webp"
+      alt=""
+      aria-hidden="true"
+      class="sticker"
+    />
+    <h1 appTextReveal class="ff_nhg">My Skills</h1>
+    <h5 appTextReveal [revealDuration]="0.3" class="ff_mb">
+      {{ intro }}
+    </h5>
+    <app-button
+      text="Get In Touch"
+      textColor="var(--main-1)"
+      arrowColor="var(--main-1)"
+      (clicked)="onContactClick()"
+    ></app-button>
+  </div>
+
+  <div class="ss_box ss_right_box">
+    @for (skill of skills; track skill.name; let index = $index) {
+      <div class="skill_box">
+        <div class="count">
+          <h6 class="ff_mb">{{ index + 1 }}</h6>
+        </div>
+        <h3 class="ff_nhg">{{ skill.name }}</h3>
+        <img [src]="skill.icon" [alt]="skill.name + ' logo'" loading="lazy" />
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,86 @@
+@keyframes cta-arrow-pulse {
+  0%,
+  100% {
+    fill: var(--main-1);
+  }
+
+  50% {
+    fill: var(--main-2a);
+  }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 1.1rem 3.3rem;
+  font-size: 1.8rem;
+  background: var(--main-2);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 6px 6px 0 var(--main-3);
+  transform: skewX(-15deg);
+  transition: box-shadow 0.5s ease;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    box-shadow: 10px 10px 0 var(--main-2a);
+
+    .cta__arrows {
+      margin-right: 4.5rem;
+    }
+
+    .cta__arrow--one,
+    .cta__arrow--two {
+      transform: translateX(0%);
+    }
+
+    .cta__arrow--one {
+      animation: cta-arrow-pulse 1s infinite 0.6s;
+    }
+
+    .cta__arrow--two {
+      animation: cta-arrow-pulse 1s infinite 0.4s;
+    }
+
+    .cta__arrow--three {
+      animation: cta-arrow-pulse 1s infinite 0.2s;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none;
+  }
+}
+
+.cta__label {
+  line-height: 1;
+  margin-top: 0.3rem;
+  transform: skewX(15deg);
+}
+
+.cta__arrows {
+  position: relative;
+  top: 12%;
+  width: 2rem;
+  margin-left: 3rem;
+  transition: margin-right 0.5s ease;
+}
+
+.cta__arrow {
+  transition: transform 0.4s ease;
+}
+
+.cta__arrow--one {
+  transform: translateX(-60%);
+}
+
+.cta__arrow--two {
+  transform: translateX(-30%);
+  transition-duration: 0.5s;
+}

@@ -7,6 +7,8 @@ import { HeaderComponent } from './layout/header/header.component';
 import { MenuComponent } from './layout/menu/menu.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BulbComponent } from './shared/components/bulb/bulb.component';
+import { DesignationComponent } from './features/designation/designation.component';
+import { SkillsComponent } from './features/skills/skills.component';
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
 
@@ -20,7 +22,9 @@ const MENU_CLOSE_DURATION_SECONDS = 0.5;
     BulbComponent,
     HomeComponent,
     AboutComponent,
-  ],
+    SkillsComponent,
+    DesignationComponent
+],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

@@ -1,0 +1,103 @@
+.skills_section {
+  padding: 5rem 15rem;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .ss_box {
+    width: 50%;
+    min-height: calc(100vh - 10rem);
+    height: auto;
+    position: relative;
+
+    &.ss_right_box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 50rem;
+      gap: 1rem;
+
+      .skill_box {
+        width: 100%;
+        min-width: 100%;
+        border-radius: 1rem;
+        background-color: var(--main-3);
+        height: 5rem;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        position: relative;
+
+        img {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 2.5rem;
+          width: auto;
+          right: 2rem;
+        }
+
+        .count {
+          width: 3rem;
+          height: 3rem;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          background-color: var(--main-1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          h6 {
+            font-size: 1.4rem;
+            font-weight: 300;
+          }
+        }
+
+        h3 {
+          font-size: 1.8rem;
+          font-weight: 1000;
+          color: var(--main-1);
+        }
+      }
+    }
+
+    &.ss_left_box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2rem;
+
+      .sticker {
+        position: absolute;
+        top: 10rem;
+        right: 2rem;
+        height: 10rem;
+        z-index: 9;
+        width: auto;
+        aspect-ratio: 1;
+      }
+
+      h1 {
+        font-size: 12rem;
+        font-weight: 1000;
+        line-height: 1;
+
+        span span:first-child {
+          color: var(--main-2);
+        }
+      }
+
+      h5 {
+        font-size: 1.8rem;
+        font-weight: 300;
+        line-height: 1.5;
+        color: var(--main-3);
+      }
+    }
+  }
+}

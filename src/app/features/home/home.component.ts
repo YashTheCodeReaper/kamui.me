@@ -13,8 +13,13 @@ import {
 } from '@angular/core';
 import { gsap, Power3 } from 'gsap';
 
+import {
+  ModelScene,
+  decoratePbrMetal,
+  pbrRedKeyLighting,
+} from '../../shared/three/model-scene';
+import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
 import { FEATURE_SLIDES } from './data/feature-slides';
-import { MaskScene } from './scenes/mask-scene';
 
 declare const Gradient: new () => { initGradient(selector: string): void };
 
@@ -27,7 +32,7 @@ const SLIDE_OFFSCREEN = '-50rem';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [TextRevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -41,10 +46,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   protected readonly activeIndex = signal(0);
   protected readonly activeSlide = computed(() => this.slides[this.activeIndex()]);
 
-  private maskScene?: MaskScene;
+  private maskScene?: ModelScene;
   private cycleTimer?: ReturnType<typeof setInterval>;
   private exitTimer?: ReturnType<typeof setTimeout>;
-  private gradient?: { initGradient(selector: string): void };
 
   ngAfterViewInit(): void {
     this.initBackgroundGradient();
@@ -74,13 +78,23 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   private initBackgroundGradient(): void {
-    this.gradient = new Gradient();
-    this.gradient.initGradient(GRADIENT_SELECTOR);
+    new Gradient().initGradient(GRADIENT_SELECTOR);
   }
 
   private initMaskScene(): void {
-    this.maskScene = new MaskScene(this.sceneHost.nativeElement);
-    this.maskScene.load(MASK_MODEL_PATH).catch(err => console.error('[MaskScene] load failed', err));
+    this.maskScene = new ModelScene(this.sceneHost.nativeElement, {
+      lights: pbrRedKeyLighting,
+      decorateMesh: decoratePbrMetal,
+      cameraDistanceMultiplier: 1.25,
+      pointerSensitivity: 0.5,
+      frameModel: (model, { center }) => {
+        // Preserve the original mask framing (slight Z push).
+        model.position.set(center.x, -center.y, -center.z * 1.2);
+      },
+    });
+    this.maskScene
+      .load(MASK_MODEL_PATH)
+      .catch(err => console.error('[HomeComponent] mask load failed', err));
     this.maskScene.start();
   }
 
@@ -112,14 +126,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   private animateHeadlineIn(): void {
     const base = { transform: 'translateX(0%)', ease: Power3.easeOut, duration: 1.5 };
-    gsap.to('.fcf-h5',  { ...base, delay: 1.5 });
+    gsap.to('.fcf-h5', { ...base, delay: 1.5 });
     gsap.to('.fcf-h11', { ...base, delay: 0.5 });
     gsap.to('.fcf-h12', { ...base, delay: 0.75 });
   }
 
   private animateHeadlineOut(): void {
-    const base = { transform: `translateX(${SLIDE_OFFSCREEN})`, ease: Power3.easeInOut, duration: 1.5 };
-    gsap.to('.fcf-h5',  { ...base, delay: 0 });
+    const base = {
+      transform: `translateX(${SLIDE_OFFSCREEN})`,
+      ease: Power3.easeInOut,
+      duration: 1.5,
+    };
+    gsap.to('.fcf-h5', { ...base, delay: 0 });
     gsap.to('.fcf-h11', { ...base, delay: 0.5 });
     gsap.to('.fcf-h12', { ...base, delay: 0.75 });
   }

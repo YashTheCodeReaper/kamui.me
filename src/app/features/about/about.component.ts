@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
 
 const SLIDER_SELECTOR = '.as_slider_overlay';
 const SECTION_SELECTOR = '.about_section';
@@ -29,7 +30,7 @@ const PARALLAX_RULES: readonly ParallaxRule[] = [
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [TextRevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',

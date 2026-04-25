@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
 
 const LEFT_INTRO_LINES: readonly string[] = [
   'Just a curious mind',
@@ -16,7 +17,7 @@ const RIGHT_INTRO_LINES: readonly string[] = [
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, TextRevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

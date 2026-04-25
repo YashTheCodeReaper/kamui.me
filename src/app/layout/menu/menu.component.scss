@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 8;
+  z-index: 99;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(7, 1fr);
