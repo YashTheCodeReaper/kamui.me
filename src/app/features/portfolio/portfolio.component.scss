@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.portfolio_section {
+  position: relative;
+  overflow: hidden;
+  height: 300dvh;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+
+  h1 {
+    font-size: 5rem;
+    font-weight: 1000;
+
+    span {
+        color: var(--main-2);
+    }
+  }
+
+  .portfolio-section__canvas {
+    position: absolute;
+    inset: 0;
+    top: 10rem;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+    touch-action: none;
+  }
+}

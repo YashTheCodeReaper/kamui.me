@@ -12,6 +12,7 @@ import { MenuComponent } from './layout/menu/menu.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BulbComponent } from './shared/components/bulb/bulb.component';
 import { FluidCursorComponent } from "./shared/components/fluid-cursor/fluid-cursor.component";
+import { PortfolioComponent } from "./features/portfolio/portfolio.component";
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
 const MENU_REVEAL_SELECTOR = '.enc';
@@ -30,7 +31,8 @@ const MENU_REVEAL_SELECTOR = '.enc';
     SkillsComponent,
     QuoteComponent,
     FooterComponent,
-    FluidCursorComponent
+    FluidCursorComponent,
+    PortfolioComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
