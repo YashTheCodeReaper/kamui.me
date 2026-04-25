@@ -18,6 +18,12 @@ $bulb-off: 0 0 0 0 transparent;
   animation: swing $swing-duration ease-in-out infinite;
 }
 
+@media (max-width: 768px) {
+  .bulb-container {
+    scale: 0.32;
+  }
+}
+
 .wire {
   position: relative;
   z-index: 1;

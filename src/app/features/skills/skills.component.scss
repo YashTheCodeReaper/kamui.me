@@ -4,6 +4,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  // Allow stacking on narrow viewports.
+  flex-wrap: wrap;
 
   .ss_box {
     width: 50%;
@@ -97,6 +99,69 @@
         font-weight: 300;
         line-height: 1.5;
         color: var(--main-3);
+      }
+    }
+  }
+}
+
+// ----- Tablet (<= 1024px) -----------------------------------------------------
+@media (max-width: 1024px) {
+  .skills_section {
+    padding: 4rem 4rem;
+
+    .ss_box.ss_right_box {
+      padding-top: 8rem;
+    }
+  }
+}
+
+// ----- Mobile (<= 768px) ------------------------------------------------------
+// Stack the two columns. The left box drops its centered alignment to flow
+// naturally above the skill list.
+@media (max-width: 768px) {
+  .skills_section {
+    padding: 3rem 2rem;
+    gap: 3rem;
+
+    .ss_box {
+      width: 100%;
+      min-height: auto;
+
+      &.ss_left_box {
+        gap: 1.5rem;
+
+        .sticker {
+          top: 1rem;
+          right: 1rem;
+          height: 6rem;
+        }
+
+        h1 {
+          font-size: clamp(4rem, 16vw, 8rem);
+        }
+
+        h5 {
+          font-size: 1.4rem;
+        }
+      }
+
+      &.ss_right_box {
+        padding-top: 0;
+
+        .skill_box {
+          height: 4.5rem;
+          padding: 0 1.5rem;
+          gap: 1.5rem;
+
+          img {
+            right: 1.5rem;
+            height: 2rem;
+          }
+
+          h3 {
+            font-size: 1.5rem;
+          }
+        }
       }
     }
   }

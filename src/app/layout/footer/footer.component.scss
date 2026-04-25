@@ -106,13 +106,99 @@ footer {
     right: 5rem;
 
     h1 {
-      font-size: 24rem;
+      font-size: clamp(6rem, 28vw, 24rem);
       font-weight: 1000;
       line-height: 1;
       text-transform: uppercase;
 
       span {
         color: var(--main-2);
+      }
+    }
+  }
+}
+
+// ----- Tablet (<= 1024px) -----------------------------------------------------
+@media (max-width: 1024px) {
+  footer {
+    .footer_top {
+      .ft_left {
+        max-width: 45%;
+      }
+
+      .ff_right {
+        gap: 3rem;
+
+        .ffr_left h4 {
+          font-size: 4rem;
+        }
+      }
+    }
+
+    .kamui_foot {
+      bottom: 3rem;
+      right: 2rem;
+    }
+  }
+}
+
+// ----- Mobile (<= 768px) ------------------------------------------------------
+@media (max-width: 768px) {
+  footer {
+    height: auto;
+    min-height: 100dvh;
+    padding: 6rem 1.5rem 2rem;
+    gap: 3rem;
+
+    img {
+      height: 60dvh;
+    }
+
+    h4 {
+      font-size: 1.4rem;
+    }
+
+    .footer_top {
+      flex-direction: column;
+      gap: 3rem;
+
+      .ft_left {
+        max-width: 100%;
+      }
+
+      .ff_right {
+        flex-direction: column;
+        gap: 2rem;
+
+        .ffr_left h4 {
+          font-size: clamp(2.4rem, 11vw, 4rem);
+        }
+
+        .ffr_right .ffrr_box p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .footer_extra {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      h4 {
+        font-size: 1.1rem;
+      }
+    }
+
+    .kamui_foot {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      width: 100%;
+      text-align: center;
+
+      h1 {
+        font-size: clamp(5rem, 26vw, 12rem);
       }
     }
   }

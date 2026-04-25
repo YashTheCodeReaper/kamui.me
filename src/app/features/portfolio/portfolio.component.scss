@@ -14,7 +14,7 @@
   gap: 2rem;
 
   h1 {
-    font-size: 5rem;
+    font-size: clamp(2.6rem, 9vw, 5rem);
     font-weight: 1000;
 
     span {
@@ -31,5 +31,15 @@
     display: block;
     cursor: grab;
     touch-action: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio_section {
+    gap: 1rem;
+
+    .portfolio-section__canvas {
+      top: 7rem;
+    }
   }
 }

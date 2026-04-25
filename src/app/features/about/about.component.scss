@@ -94,3 +94,66 @@
     }
   }
 }
+
+// ----- Mobile (<= 768px) ------------------------------------------------------
+// The horizontal pinned scroll still works (translateX(-100vw) is viewport-
+// relative). We just shrink fonts/images so 200dvw of content actually reads
+// on a phone and pull the giant negative margins way back so blocks don't
+// collide.
+@media (max-width: 768px) {
+  .about_section {
+    .as_slider_overlay {
+      .c {
+        h3 {
+          margin-top: -10rem;
+          font-size: clamp(2.4rem, 10vw, 3.6rem);
+        }
+
+        p {
+          margin-top: 18rem;
+          margin-left: -3rem;
+          max-width: 28rem;
+          font-size: 1.3rem;
+        }
+      }
+
+      .c1 {
+        padding: 0 0 0 4rem;
+
+        img {
+          height: 22rem;
+          margin-left: -2rem;
+        }
+      }
+
+      .c2,
+      .c3 {
+        padding: 0 0 0 3rem;
+
+        .img_container {
+          width: 16rem;
+          height: 20rem;
+          margin-top: -3rem;
+          margin-left: 2rem;
+        }
+
+        .ic1 {
+          width: 11rem;
+          height: 14rem;
+          margin-top: -10rem;
+        }
+
+        .ic3 {
+          width: 30rem;
+          height: 22rem;
+        }
+      }
+
+      .c3 p {
+        margin: 0 2rem -8rem -8rem;
+        max-width: 24rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

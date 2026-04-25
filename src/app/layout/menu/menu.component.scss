@@ -88,3 +88,58 @@
     }
   }
 }
+
+// ----- Tablet (<= 1024px) -----------------------------------------------------
+@media (max-width: 1024px) {
+  .menu_section {
+    .ms_c .enc {
+      padding-left: 6rem;
+      gap: 6rem;
+
+      h1 {
+        font-size: 6rem;
+      }
+
+      .mini_buttons h4 {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+// ----- Mobile (<= 768px) ------------------------------------------------------
+// At phone widths the seven-row grid holds, but row content has to compress.
+// Drop the huge inset, shrink the headline, and tighten the right-edge
+// social-icon padding so nothing escapes the viewport.
+@media (max-width: 768px) {
+  .menu_section {
+    .ms_c .enc {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      gap: 2rem;
+
+      h1 {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+      }
+
+      .mini_buttons {
+        h4 {
+          font-size: 1.4rem;
+        }
+
+        p,
+        a {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .ms_c.null .enc .social_icons {
+      gap: 1.8rem;
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

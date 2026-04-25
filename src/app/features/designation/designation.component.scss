@@ -5,13 +5,17 @@
   align-items: center;
   justify-content: center;
   height: 100dvh;
+  // Padding gives the headline breathing room on narrow viewports where the
+  // text would otherwise touch the edges.
+  padding: 0 1rem;
 
   h1 {
     text-align: center;
-    font-size: 14rem;
+    // Fluid: never wider than the viewport, never smaller than legible.
+    font-size: clamp(3.6rem, 14vw, 14rem);
     font-weight: 1000;
     line-height: 0.75;
-    letter-spacing: -0.25rem;
+    letter-spacing: clamp(-0.1rem, -0.4vw, -0.25rem);
     text-transform: uppercase;
     color: var(--main-3);
 

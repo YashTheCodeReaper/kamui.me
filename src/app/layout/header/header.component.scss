@@ -73,3 +73,37 @@ header {
 header.dark_class {
   color: var(--main-1);
 }
+
+// ----- Tablet/Mobile ----------------------------------------------------------
+// The two `.context` callouts only fit on a wide layout — hide them once the
+// header would feel cramped. Trim padding so the brand and the menu button sit
+// closer to the edges.
+@media (max-width: 1024px) {
+  header {
+    padding: 2.5rem 1.5rem;
+
+    .context {
+      &.c1,
+      &.c2 {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 2rem 1.2rem;
+
+    h3 {
+      font-size: 1.6rem;
+    }
+
+    .menu-box {
+      i {
+        height: 2rem;
+        font-size: 2rem;
+      }
+    }
+  }
+}

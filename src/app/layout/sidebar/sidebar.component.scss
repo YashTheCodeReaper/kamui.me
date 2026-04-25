@@ -25,3 +25,12 @@
     }
   }
 }
+
+// ----- Mobile (<= 768px) ------------------------------------------------------
+// The sidebar's social column collides with hero text on narrow viewports —
+// hide it; the same icons appear in the menu and footer, so nothing is lost.
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}

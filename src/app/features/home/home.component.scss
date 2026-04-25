@@ -87,7 +87,8 @@
       top: 0;
       left: 0;
       z-index: 1;
-      width: auto;
+      // Cover both axes so portrait phones don't see vertical bars.
+      width: 100%;
       height: 100%;
       object-fit: cover;
     }
@@ -259,4 +260,81 @@
   --gradient-color-2: #4bebc6;
   --gradient-color-3: var(--main-1);
   --gradient-color-4: #784beb;
+}
+
+// ----- Mobile (<= 768px) ------------------------------------------------------
+// Pull the feature slider in from the desktop's 20rem inset, scale the headline
+// down with clamp(), shrink slider indicators, and reposition the secondary
+// "watch the video" + attribute callouts so they stack against the right edge
+// instead of fighting the slider for the bottom-left corner.
+@media (max-width: 768px) {
+  .home_section {
+    .feature-slider {
+      bottom: 12rem;
+      left: 2rem;
+      right: 2rem;
+      gap: 2rem;
+
+      .feature-content-flex {
+        h5 {
+          margin-bottom: 1.5rem;
+          font-size: 1rem;
+        }
+
+        h1 {
+          font-size: clamp(2.6rem, 11vw, 4.2rem);
+          line-height: 0.9;
+        }
+      }
+
+      .slider-indicator-flex {
+        gap: 0.6rem;
+
+        .si {
+          width: 2.4rem;
+        }
+      }
+    }
+
+    .attribute {
+      bottom: 4rem;
+      right: 2rem;
+
+      p { font-size: 1rem; }
+      h5 { font-size: 1.3rem; }
+    }
+
+    .short-video {
+      // Anchor to the top-right so it doesn't crash into the feature slider
+      // which now spans the full bottom strip.
+      top: auto;
+      bottom: 26rem;
+      right: 2rem;
+      transform: none;
+
+      h5 { font-size: 1.2rem; }
+
+      .watch-button {
+        h2 { font-size: 2.2rem; }
+        i { font-size: 1.8rem; }
+      }
+    }
+
+    &::before {
+      height: 6rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home_section {
+    .short-video {
+      bottom: 24rem;
+
+      .watch-button {
+        h2 { font-size: 1.8rem; }
+        i { font-size: 1.4rem; }
+      }
+    }
+  }
 }
