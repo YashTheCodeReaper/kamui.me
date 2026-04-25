@@ -7,7 +7,7 @@ import { SocialLink } from '../models/social-link.model';
  * TODO: replace placeholders below with real account URLs.
  *   - LinkedIn, Discord, WhatsApp, Twitter, Messenger
  */
-const EMAIL_HREF = 'mailto:yash.kamui.me@gmail.com';
+const EMAIL_HREF = 'mailto:touch@yashkamui.me';
 const INSTAGRAM_HREF = 'https://instagram.com/_yash_itaxxci';
 
 export const SIDEBAR_SOCIAL_LINKS: readonly SocialLink[] = [

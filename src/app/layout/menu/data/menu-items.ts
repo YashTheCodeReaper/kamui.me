@@ -33,5 +33,5 @@ export const MENU_MINI_ACTIONS: readonly MenuMiniAction[] = [
   // make this download actually work; until then it'll 404.
   { title: 'Get My CV', href: 'assets/yashwanth-cv.pdf', download: 'Yashwanth-Kumar-CV.pdf' },
   { title: 'Contact', scrollTo: 'footer' },
-  { title: 'Mail me at', label: 'yash.kamui.me@gmail.com', href: 'mailto:yash.kamui.me@gmail.com' },
+  { title: 'Mail me at', label: 'touch@yashkamui.me', href: 'mailto:touch@yashkamui.me' },
 ];

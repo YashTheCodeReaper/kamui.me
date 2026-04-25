@@ -34,8 +34,8 @@ export const FOOTER_CONTACTS: readonly FooterContact[] = [
   },
   {
     intro: 'Write to me:',
-    value: 'yash.kamui.me@gmail.com',
-    href: 'mailto:yash.kamui.me@gmail.com',
+    value: 'touch@yashkamui.me',
+    href: 'mailto:touch@yashkamui.me',
   },
 ];
 
