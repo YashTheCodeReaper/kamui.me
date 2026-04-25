@@ -2,17 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Kamui.Me - Crafted By Yash</title>
+    <title>Kamui.Me — Yashwanth · Frontend Engineer & Designer</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta
+      name="description"
+      content="Portfolio of Yashwanth — frontend engineer and designer. Real-time WebGL, Angular, and motion-driven interfaces."
+    />
+    <meta name="author" content="Yashwanth" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kamui.Me — Crafted by Yash" />
+    <meta
+      property="og:description"
+      content="Frontend engineer and designer. Real-time WebGL, Angular, and motion-driven interfaces."
+    />
+    <meta property="og:url" content="https://kamui.me/" />
+    <meta property="og:site_name" content="Kamui.Me" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kamui.Me — Crafted by Yash" />
+    <meta
+      name="twitter:description"
+      content="Frontend engineer and designer. Real-time WebGL, Angular, and motion-driven interfaces."
+    />
+
+    <link rel="canonical" href="https://kamui.me/" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <script src="assets/js/lenis.min.js"></script>
-    <script src="assets/js/lenis.init.js"></script>
-    <script src="assets/js/gradient.js"></script>
+
+    <!--
+      Vendor scripts: defer so they don't block parsing of the Angular bundle.
+      gradient.js is bundled via angular.json `scripts` and injected
+      automatically — do not duplicate it here.
+    -->
+    <script src="assets/js/lenis.min.js" defer></script>
+    <script src="assets/js/lenis.init.js" defer></script>
   </head>
 
   <body id="body" class="theme_light">
     <app-root></app-root>
-    <script src="assets/js/hscr.js"></script>
+    <script src="assets/js/hscr.js" defer></script>
   </body>
 </html>

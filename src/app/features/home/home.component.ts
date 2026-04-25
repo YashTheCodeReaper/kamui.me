@@ -25,6 +25,7 @@ declare const Gradient: new () => { initGradient(selector: string): void };
 
 const GRADIENT_SELECTOR = '#home-gradient-canvas';
 const MASK_MODEL_PATH = 'assets/models/samumask.glb';
+const HERO_VIDEO_PATH = 'assets/videos/vader.mp4';
 const SLIDE_INTERVAL_MS = 12_000;
 const SLIDE_EXIT_DELAY_MS = 10_000;
 const SLIDE_OFFSCREEN = '-50rem';
@@ -39,6 +40,8 @@ const SLIDE_OFFSCREEN = '-50rem';
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('sceneHost', { static: true }) private readonly sceneHost!: ElementRef<HTMLElement>;
+  @ViewChild('heroVideo', { static: true })
+  private readonly heroVideoRef!: ElementRef<HTMLVideoElement>;
 
   private readonly document = inject(DOCUMENT);
 
@@ -49,16 +52,19 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private maskScene?: ModelScene;
   private cycleTimer?: ReturnType<typeof setInterval>;
   private exitTimer?: ReturnType<typeof setTimeout>;
+  private heroVideoObserver?: IntersectionObserver;
 
   ngAfterViewInit(): void {
     this.initBackgroundGradient();
     this.initSlider();
     this.initMaskScene();
+    this.initHeroVideo();
   }
 
   ngOnDestroy(): void {
     if (this.cycleTimer) clearInterval(this.cycleTimer);
     if (this.exitTimer) clearTimeout(this.exitTimer);
+    this.heroVideoObserver?.disconnect();
     this.maskScene?.dispose();
   }
 
@@ -79,6 +85,36 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   private initBackgroundGradient(): void {
     new Gradient().initGradient(GRADIENT_SELECTOR);
+  }
+
+  /**
+   * Hero video is ~30 MB — defer loading until the user is actually near the
+   * video section, then pause when scrolled away so the decoder isn't burning
+   * battery on hidden frames.
+   */
+  private initHeroVideo(): void {
+    const video = this.heroVideoRef.nativeElement;
+    let loaded = false;
+
+    this.heroVideoObserver = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            if (!loaded) {
+              video.src = HERO_VIDEO_PATH;
+              loaded = true;
+            }
+            void video.play().catch(() => {
+              /* autoplay blocked — ignore */
+            });
+          } else if (loaded) {
+            video.pause();
+          }
+        }
+      },
+      { rootMargin: '25% 0px' },
+    );
+    this.heroVideoObserver.observe(video);
   }
 
   private initMaskScene(): void {

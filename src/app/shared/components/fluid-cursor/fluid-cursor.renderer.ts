@@ -154,7 +154,9 @@ export class FluidCursorRenderer {
   private animationHandle = 0;
   private lastTime = 0;
   private disposed = false;
+  private visible = true;
   private resizeObserver?: ResizeObserver;
+  private intersectionObserver?: IntersectionObserver;
 
   constructor(canvas: HTMLCanvasElement, config: Partial<FluidConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -184,9 +186,25 @@ export class FluidCursorRenderer {
 
   start(): void {
     this.lastTime = performance.now();
+    // Pause the simulation when the canvas is fully off-screen — fluid-cursor
+    // is host-fixed but the document tab itself can be hidden, and an off-page
+    // canvas (e.g. zero-size during transitions) shouldn't burn GPU cycles.
+    this.intersectionObserver = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) this.visible = entry.isIntersecting;
+      },
+      { rootMargin: '20% 0px' },
+    );
+    this.intersectionObserver.observe(this.renderer.domElement);
+
     const tick = () => {
       if (this.disposed) return;
       this.animationHandle = requestAnimationFrame(tick);
+      if (!this.visible || document.hidden) {
+        // Reset clock so we don't get a giant dt jump when we resume.
+        this.lastTime = performance.now();
+        return;
+      }
       this.frame();
     };
     tick();
@@ -227,6 +245,8 @@ export class FluidCursorRenderer {
     this.disposed = true;
     cancelAnimationFrame(this.animationHandle);
     this.resizeObserver?.disconnect();
+    this.intersectionObserver?.disconnect();
+    this.intersectionObserver = undefined;
     Object.values(this.materials).forEach(m => m.dispose());
     this.disposeDouble(this.velocity);
     this.disposeDouble(this.dye);

@@ -62,6 +62,8 @@ export class ModelScene {
   private animationHandle: number | null = null;
   private resizeListener?: () => void;
   private disposed = false;
+  private visible = true;
+  private intersectionObserver?: IntersectionObserver;
 
   constructor(private readonly host: HTMLElement, options: Partial<ModelSceneOptions> = {}) {
     this.options = { ...DEFAULT_OPTIONS, ...options };
@@ -105,9 +107,21 @@ export class ModelScene {
   }
 
   start(): void {
-    const tick = () => {
+    // Only render while the host element is on screen — the scene is fixed
+    // to a section and there's no point burning GPU + main-thread budget on
+    // it once the user has scrolled past.
+    this.intersectionObserver = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) this.visible = entry.isIntersecting;
+      },
+      { rootMargin: '20% 0px' },
+    );
+    this.intersectionObserver.observe(this.host);
+
+    const tick = (): void => {
       if (this.disposed) return;
       this.animationHandle = requestAnimationFrame(tick);
+      if (!this.visible) return;
       this.updateRotation();
       this.renderer.render(this.scene, this.camera);
     };
@@ -130,6 +144,8 @@ export class ModelScene {
       window.removeEventListener('resize', this.resizeListener);
       this.resizeListener = undefined;
     }
+    this.intersectionObserver?.disconnect();
+    this.intersectionObserver = undefined;
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }

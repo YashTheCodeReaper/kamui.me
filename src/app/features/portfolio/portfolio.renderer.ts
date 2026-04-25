@@ -101,7 +101,9 @@ export class PortfolioSliderRenderer {
   private lastFrameTime = 0;
   private rafHandle = 0;
   private disposed = false;
+  private visible = true;
   private resizeObserver?: ResizeObserver;
+  private intersectionObserver?: IntersectionObserver;
 
   // Bound listener references (kept stable for removeEventListener)
   private readonly onWheel = (e: WheelEvent): void => this.handleWheel(e);
@@ -207,9 +209,26 @@ export class PortfolioSliderRenderer {
   start(): void {
     this.attachListeners();
     this.lastFrameTime = 0;
+
+    // Skip the entire NS-style sim + render pipeline while the section is off
+    // screen. RAF still ticks (cheaper than tearing the loop down/up around
+    // re-entry) but we exit before any GPU work runs.
+    this.intersectionObserver = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) this.visible = entry.isIntersecting;
+      },
+      { rootMargin: '20% 0px' },
+    );
+    this.intersectionObserver.observe(this.host);
+
     const tick = (time: number): void => {
       if (this.disposed) return;
       this.rafHandle = requestAnimationFrame(tick);
+      if (!this.visible) {
+        // Reset the dt baseline so the first visible frame isn't a giant jump.
+        this.lastFrameTime = 0;
+        return;
+      }
       this.frame(time);
     };
     this.rafHandle = requestAnimationFrame(tick);
@@ -223,6 +242,7 @@ export class PortfolioSliderRenderer {
     clearTimeout(this.touchMomentumTimeout);
     this.detachListeners();
     this.resizeObserver?.disconnect();
+    this.intersectionObserver?.disconnect();
 
     for (const slide of this.slideMeshes) {
       slide.mesh.geometry.dispose();

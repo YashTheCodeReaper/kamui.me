@@ -39,7 +39,14 @@
   </div>
 
   <div class="video_flex">
-    <video src="assets/videos/vader.mp4" muted autoplay loop [controls]="false"></video>
+    <video
+      #heroVideo
+      muted
+      loop
+      playsinline
+      preload="none"
+      [controls]="false"
+    ></video>
     @for (_ of [0, 1, 2, 3]; track $index) {
       <div class="video_cover">
         <div class="vc_bg"></div>

@@ -15,13 +15,13 @@ import { PortfolioSlide, PortfolioSliderRenderer } from './portfolio.renderer';
 // Slides driven by the assets in src/assets/images/portfolio. Per-slide
 // heights are randomised at runtime, so order here doesn't dictate rhythm.
 const SLIDES: readonly PortfolioSlide[] = [
-  { name: 'Signature Mark', img: 'assets/images/portfolio/signature-mark.png' },
-  { name: 'Hero Landing', img: 'assets/images/portfolio/hero-landing.png' },
-  { name: 'Photo Grid', img: 'assets/images/portfolio/photo-grid.png' },
-  { name: 'Ghost Of Sparta', img: 'assets/images/portfolio/ghost-of-sparta.png' },
-  { name: 'Design • Develop • Replicate', img: 'assets/images/portfolio/design-develop-replicate.png' },
-  { name: 'Tech Stack', img: 'assets/images/portfolio/tech-stack.png' },
-  { name: 'Summon Me', img: 'assets/images/portfolio/summon-me.png' },
+  { name: 'Signature Mark', img: 'assets/images/portfolio/signature-mark.webp' },
+  { name: 'Hero Landing', img: 'assets/images/portfolio/hero-landing.webp' },
+  { name: 'Photo Grid', img: 'assets/images/portfolio/photo-grid.webp' },
+  { name: 'Ghost Of Sparta', img: 'assets/images/portfolio/ghost-of-sparta.webp' },
+  { name: 'Design • Develop • Replicate', img: 'assets/images/portfolio/design-develop-replicate.webp' },
+  { name: 'Tech Stack', img: 'assets/images/portfolio/tech-stack.webp' },
+  { name: 'Summon Me', img: 'assets/images/portfolio/summon-me.webp' },
   { name: 'Frame 01', img: 'assets/images/portfolio/1712634669028.jpeg' },
   { name: 'Frame 02', img: 'assets/images/portfolio/1712634669042.jpeg' },
   { name: 'Frame 03', img: 'assets/images/portfolio/1712634669063.jpeg' },
