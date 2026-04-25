@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
+import { scrollToSection } from '../../shared/utils/scroll';
 import { SKILLS, SKILLS_INTRO } from './data/skills';
 
 const SECTION_SELECTOR = '.skills_section';
@@ -43,7 +44,8 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
   }
 
   protected onContactClick(): void {
-    // Future hook: emit analytics or scroll to contact section.
+    // Footer holds the actual contact info (email, IG handle, social row).
+    scrollToSection('footer');
   }
 
   private pinLeftColumn(): void {

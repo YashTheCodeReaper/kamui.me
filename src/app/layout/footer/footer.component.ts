@@ -9,14 +9,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
+import { scrollToSection } from '../../shared/utils/scroll';
 import {
   FOOTER_CONTACTS,
   FOOTER_COPYRIGHT,
+  FOOTER_EXTRA_LINKS,
   FOOTER_NAV_LINKS,
   FOOTER_PITCH,
+  FooterNavLink,
 } from './data/footer-content';
 
 const TRIGGER_SELECTOR = '.footer';
+const FOOTER_SELECTOR = 'footer';
 
 interface ScrubAnimation {
   readonly target: string;
@@ -47,6 +51,7 @@ export class FooterComponent implements AfterViewInit, OnDestroy {
   protected readonly pitch = FOOTER_PITCH;
   protected readonly navLinks = FOOTER_NAV_LINKS;
   protected readonly contacts = FOOTER_CONTACTS;
+  protected readonly extraLinks = FOOTER_EXTRA_LINKS;
   protected readonly copyright = FOOTER_COPYRIGHT;
 
   private tweens: gsap.core.Tween[] = [];
@@ -65,7 +70,15 @@ export class FooterComponent implements AfterViewInit, OnDestroy {
   }
 
   protected onContactClick(): void {
-    // Hook for analytics or smooth scroll to contact form.
+    // The "Get In Touch" CTA on the footer itself just settles the user back
+    // at the top of the footer — feels weird, but at least it's not a no-op.
+    scrollToSection(FOOTER_SELECTOR);
+  }
+
+  protected onNavLinkClick(link: FooterNavLink, event: MouseEvent): void {
+    if (!link.target) return;
+    event.preventDefault();
+    scrollToSection(link.target);
   }
 
   protected accent(label: string): string {

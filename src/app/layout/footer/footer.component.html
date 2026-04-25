@@ -15,9 +15,21 @@
     <div class="ff_right">
       <nav class="ffr_left ff_nhg" aria-label="Footer">
         @for (link of navLinks; track link.label) {
-          <h4>
-            <span>{{ accent(link.label) }}</span>{{ rest(link.label) }}
-          </h4>
+          @if (link.target) {
+            <a
+              class="ffr_link"
+              [href]="'#' + link.label.toLowerCase()"
+              (click)="onNavLinkClick(link, $event)"
+            >
+              <h4>
+                <span>{{ accent(link.label) }}</span>{{ rest(link.label) }}
+              </h4>
+            </a>
+          } @else {
+            <h4 class="ffr_link ffr_link--disabled" aria-disabled="true">
+              <span>{{ accent(link.label) }}</span>{{ rest(link.label) }}
+            </h4>
+          }
         }
       </nav>
 
@@ -26,7 +38,13 @@
           <div class="ffrr_box">
             <p>{{ contact.intro }}</p>
             @if (contact.href) {
-              <a [href]="contact.href"><h4>{{ contact.value }}</h4></a>
+              <a
+                [href]="contact.href"
+                [attr.target]="contact.href.startsWith('http') ? '_blank' : null"
+                [attr.rel]="contact.href.startsWith('http') ? 'noopener noreferrer' : null"
+              >
+                <h4>{{ contact.value }}</h4>
+              </a>
             } @else {
               <h4>{{ contact.value }}</h4>
             }
@@ -38,7 +56,20 @@
 
   <div class="footer_extra ff_mb">
     <h4>{{ copyright }}</h4>
-    <h4>Linked In</h4>
+    @for (link of extraLinks; track link.label) {
+      @if (link.href) {
+        <a
+          class="footer_extra__link"
+          [href]="link.href"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h4>{{ link.label }}</h4>
+        </a>
+      } @else {
+        <h4>{{ link.label }}</h4>
+      }
+    }
   </div>
 
   <div class="kamui_foot">

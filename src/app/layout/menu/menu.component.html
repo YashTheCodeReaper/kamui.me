@@ -6,7 +6,16 @@
   @for (item of items; track item.label) {
     <div class="ms_c">
       <div class="enc">
-        <h1 role="button" class="ff_nhg" [class.active]="item.active">{{ item.label }}</h1>
+        <h1
+          role="button"
+          class="ff_nhg"
+          [class.active]="item.active"
+          [class.disabled]="!item.target"
+          [attr.aria-disabled]="!item.target ? 'true' : null"
+          (click)="onItemClick(item)"
+        >
+          {{ item.label }}
+        </h1>
       </div>
     </div>
   }
@@ -14,15 +23,33 @@
   <div class="ms_c ff_nhg">
     <div class="enc">
       @for (action of miniActions; track action.title) {
-        <div class="mini_buttons" role="button">
-          @if (action.label && action.href) {
-            <p>{{ action.title }}</p>
-            <a [href]="action.href">{{ action.label }}</a>
-          } @else {
+        @if (action.href) {
+          <a
+            class="mini_buttons"
+            [href]="action.href"
+            [attr.download]="action.download ?? null"
+            [attr.target]="action.href.startsWith('http') ? '_blank' : null"
+            [attr.rel]="action.href.startsWith('http') ? 'noopener noreferrer' : null"
+            (click)="onMiniActionClick(action, $event)"
+          >
+            @if (action.label) {
+              <p>{{ action.title }}</p>
+              <span class="mini_buttons__link">{{ action.label }}</span>
+            } @else {
+              <h4>{{ action.title }}</h4>
+            }
+            <div class="border"></div>
+          </a>
+        } @else {
+          <div
+            class="mini_buttons"
+            role="button"
+            (click)="onMiniActionClick(action, $event)"
+          >
             <h4>{{ action.title }}</h4>
-          }
-          <div class="border"></div>
-        </div>
+            <div class="border"></div>
+          </div>
+        }
       }
     </div>
   </div>
@@ -31,7 +58,18 @@
     <div class="enc">
       <div class="social_icons">
         @for (link of socialLinks; track link.platform) {
-          <i [class]="link.iconClass" [attr.aria-label]="link.platform"></i>
+          @if (link.url) {
+            <a
+              [href]="link.url"
+              [attr.aria-label]="link.platform"
+              [attr.target]="link.url.startsWith('http') ? '_blank' : null"
+              [attr.rel]="link.url.startsWith('http') ? 'noopener noreferrer' : null"
+            >
+              <i [class]="link.iconClass"></i>
+            </a>
+          } @else {
+            <i [class]="link.iconClass" [attr.aria-label]="link.platform"></i>
+          }
         }
       </div>
     </div>

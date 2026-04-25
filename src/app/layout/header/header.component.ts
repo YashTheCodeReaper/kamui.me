@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
+import { scrollToTop } from '../../shared/utils/scroll';
 
 const LEFT_INTRO_LINES: readonly string[] = [
   'Just a curious mind',
@@ -31,5 +32,9 @@ export class HeaderComponent {
 
   protected onToggle(): void {
     this.toggle.emit();
+  }
+
+  protected onBrandClick(): void {
+    scrollToTop();
   }
 }

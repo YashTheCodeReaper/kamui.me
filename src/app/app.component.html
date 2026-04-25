@@ -4,7 +4,7 @@
   <app-bulb></app-bulb>
 
   @if (menuOpen()) {
-    <app-menu></app-menu>
+    <app-menu (close)="toggleMenu()"></app-menu>
   }
 
   <app-sidebar></app-sidebar>

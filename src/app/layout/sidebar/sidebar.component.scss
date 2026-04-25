@@ -20,6 +20,12 @@
     justify-content: flex-start;
     gap: 3.5rem;
 
+    a {
+      color: inherit;
+      text-decoration: none;
+      line-height: 0;
+    }
+
     i {
       font-size: 1.4rem;
     }

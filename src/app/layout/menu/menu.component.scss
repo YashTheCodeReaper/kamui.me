@@ -36,6 +36,15 @@
         &.active {
           color: var(--main-2);
         }
+
+        // Items without a wired target (e.g. Blogs while no blog section
+        // exists) shouldn't masquerade as clickable.
+        &.disabled {
+          cursor: not-allowed;
+          opacity: 0.4;
+
+          &:hover { color: inherit; }
+        }
       }
 
       .mini_buttons {
@@ -45,19 +54,23 @@
         justify-content: flex-start;
         gap: 0.5rem;
         cursor: pointer;
+        // Anchor variant: strip the default underline + colour so the visual
+        // matches the pre-existing `<div>` styling.
+        color: inherit;
+        text-decoration: none;
 
         h4 {
           font-size: 2rem;
         }
 
         p,
-        a {
+        .mini_buttons__link {
           font-size: 1.2rem;
           color: inherit;
           text-decoration: none;
         }
 
-        a {
+        .mini_buttons__link {
           margin-top: -0.5rem;
         }
 
@@ -80,6 +93,12 @@
         justify-content: flex-start;
         gap: 3.5rem;
         color: var(--main-3);
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          line-height: 0;
+        }
 
         i {
           font-size: 1.4rem;

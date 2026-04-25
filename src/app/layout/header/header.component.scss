@@ -27,6 +27,11 @@ header {
     }
   }
 
+  .brand {
+    cursor: pointer;
+    user-select: none;
+  }
+
   .menu-box {
     display: flex;
     align-items: center;

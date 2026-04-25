@@ -1,7 +1,18 @@
 <aside class="sidebar">
   <div class="social-icons">
     @for (link of socialLinks; track link.platform) {
-      <i [class]="link.iconClass" [attr.aria-label]="link.platform"></i>
+      @if (link.url) {
+        <a
+          [href]="link.url"
+          [attr.aria-label]="link.platform"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i [class]="link.iconClass"></i>
+        </a>
+      } @else {
+        <i [class]="link.iconClass" [attr.aria-label]="link.platform"></i>
+      }
     }
   </div>
 </aside>

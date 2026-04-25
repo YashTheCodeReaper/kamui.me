@@ -1,5 +1,5 @@
 <header [ngClass]="{ dark_class: menuOpen() }">
-  <h3 class="ff_gr">KAMUI.<span>me</span></h3>
+  <h3 class="ff_gr brand" role="button" (click)="onBrandClick()">KAMUI.<span>me</span></h3>
 
   <div class="menu-box" role="button" (click)="onToggle()">
     @if (menuOpen()) {
