@@ -12,6 +12,7 @@ import { MenuComponent } from './layout/menu/menu.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BulbComponent } from './shared/components/bulb/bulb.component';
 import { FluidCursorComponent } from "./shared/components/fluid-cursor/fluid-cursor.component";
+import { OrientationNoticeComponent } from './shared/components/orientation-notice/orientation-notice.component';
 import { PortfolioComponent } from "./features/portfolio/portfolio.component";
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
@@ -32,7 +33,8 @@ const MENU_REVEAL_SELECTOR = '.enc';
     QuoteComponent,
     FooterComponent,
     FluidCursorComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    OrientationNoticeComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',

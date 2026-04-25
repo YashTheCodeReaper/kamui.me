@@ -1,10 +1,12 @@
 {
   "name": "kamui.me",
-  "version": "0.0.0",
+  "version": "1.0.0-beta.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --delete-output-path --output-hashing=all --optimization --aot --no-source-map",
+    "build:analyze": "ng build --configuration production --delete-output-path --stats-json",
     "watch": "ng build --watch --configuration development",
     "host": "ng serve --host 192.168.31.153 --ssl true",
     "test": "ng test"
