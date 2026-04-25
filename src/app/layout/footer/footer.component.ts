@@ -1,78 +1,90 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
-import { ButtonComponent } from '../../shared/components/button/button.component';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+} from '@angular/core';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import { ButtonComponent } from '../../shared/components/button/button.component';
+import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
+import {
+  FOOTER_CONTACTS,
+  FOOTER_COPYRIGHT,
+  FOOTER_NAV_LINKS,
+  FOOTER_PITCH,
+} from './data/footer-content';
+
+const TRIGGER_SELECTOR = '.footer';
+
+interface ScrubAnimation {
+  readonly target: string;
+  readonly from: gsap.TweenVars;
+  readonly to: gsap.TweenVars;
+}
+
+const SCROLL_ANIMATIONS: readonly ScrubAnimation[] = [
+  { target: '.kamui_foot h1', from: { y: 1000, opacity: 0 }, to: { y: 0, opacity: 1 } },
+  { target: '.footer_extra',  from: { y: -500, opacity: 0 }, to: { y: 0, opacity: 1 } },
+  { target: '.footer_top',    from: { y: -500, opacity: 0 }, to: { y: 0, opacity: 1 } },
+  {
+    target: '.footer img',
+    from: { marginTop: -300, opacity: 0 },
+    to: { marginTop: 0, opacity: 0.25 },
+  },
+];
 
 @Component({
   selector: 'app-footer',
   standalone: true,
   imports: [TextRevealDirective, ButtonComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
-export class FooterComponent implements AfterViewInit {
+export class FooterComponent implements AfterViewInit, OnDestroy {
+  protected readonly pitch = FOOTER_PITCH;
+  protected readonly navLinks = FOOTER_NAV_LINKS;
+  protected readonly contacts = FOOTER_CONTACTS;
+  protected readonly copyright = FOOTER_COPYRIGHT;
+
+  private tweens: gsap.core.Tween[] = [];
+
   ngAfterViewInit(): void {
     gsap.registerPlugin(ScrollTrigger);
+    this.tweens = SCROLL_ANIMATIONS.map(animation => this.createScrubTween(animation));
+  }
 
-    gsap.fromTo(
-      '.kamui_foot h1',
-      { y: 1000, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: '.footer',
-          start: 'top bottom',
-          end: 'bottom bottom',
-          scrub: true,
-        },
-      },
-    );
+  ngOnDestroy(): void {
+    for (const tween of this.tweens) {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    }
+    this.tweens = [];
+  }
 
-    gsap.fromTo(
-      '.footer_extra',
-      { y: -500, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: '.footer',
-          start: 'top bottom',
-          end: 'bottom bottom',
-          scrub: true,
-        },
-      },
-    );
+  protected onContactClick(): void {
+    // Hook for analytics or smooth scroll to contact form.
+  }
 
-    gsap.fromTo(
-      '.footer_top',
-      { y: -500, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: '.footer',
-          start: 'top bottom',
-          end: 'bottom bottom',
-          scrub: true,
-        },
-      },
-    );
+  protected accent(label: string): string {
+    return label.charAt(0);
+  }
 
-    gsap.fromTo(
-      '.footer img',
-      { marginTop: -300, opacity: 0 },
-      {
-        marginTop: 0,
-        opacity: 0.25,
-        scrollTrigger: {
-          trigger: '.footer',
-          start: 'top bottom',
-          end: 'bottom bottom',
-          scrub: true,
-        },
+  protected rest(label: string): string {
+    return label.slice(1);
+  }
+
+  private createScrubTween({ target, from, to }: ScrubAnimation): gsap.core.Tween {
+    return gsap.fromTo(target, from, {
+      ...to,
+      scrollTrigger: {
+        trigger: TRIGGER_SELECTOR,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: true,
       },
-    );
+    });
   }
 }

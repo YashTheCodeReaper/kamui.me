@@ -2,17 +2,19 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { gsap, Power4 } from 'gsap';
 
 import { AboutComponent } from './features/about/about.component';
+import { DesignationComponent } from './features/designation/designation.component';
 import { HomeComponent } from './features/home/home.component';
+import { QuoteComponent } from './features/quote/quote.component';
+import { SkillsComponent } from './features/skills/skills.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { MenuComponent } from './layout/menu/menu.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BulbComponent } from './shared/components/bulb/bulb.component';
-import { DesignationComponent } from './features/designation/designation.component';
-import { SkillsComponent } from './features/skills/skills.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { QuoteComponent } from "./features/quote/quote.component";
+import { FluidCursorComponent } from "./shared/components/fluid-cursor/fluid-cursor.component";
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
+const MENU_REVEAL_SELECTOR = '.enc';
 
 @Component({
   selector: 'app-root',
@@ -24,10 +26,11 @@ const MENU_CLOSE_DURATION_SECONDS = 0.5;
     BulbComponent,
     HomeComponent,
     AboutComponent,
-    SkillsComponent,
     DesignationComponent,
+    SkillsComponent,
+    QuoteComponent,
     FooterComponent,
-    QuoteComponent
+    FluidCursorComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
@@ -45,8 +48,8 @@ export class AppComponent {
   }
 
   private closeMenu(): void {
-    gsap.set('.enc', { top: 'unset', bottom: 0 });
-    gsap.to('.enc', {
+    gsap.set(MENU_REVEAL_SELECTOR, { top: 'unset', bottom: 0 });
+    gsap.to(MENU_REVEAL_SELECTOR, {
       height: '0%',
       duration: MENU_CLOSE_DURATION_SECONDS,
       ease: Power4.easeIn,

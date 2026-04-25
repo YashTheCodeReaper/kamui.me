@@ -79,6 +79,11 @@ footer {
           justify-content: flex-start;
           gap: 0.5rem;
 
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+
           p {
             font-size: 1.4rem;
             font-weight: 300;
