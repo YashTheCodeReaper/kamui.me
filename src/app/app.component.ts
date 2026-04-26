@@ -14,7 +14,10 @@ import CustomEase from 'gsap/CustomEase';
 gsap.registerPlugin(CustomEase);
 CustomEase.create('reveal', '0.9, 0, 0.1, 1');
 
-import { AssetCacheService, CacheStatus } from './core/services/asset-cache.service';
+import {
+  AssetCacheService,
+  CacheStatus,
+} from './core/services/asset-cache.service';
 import { AboutComponent } from './features/about/about.component';
 import { DesignationComponent } from './features/designation/designation.component';
 import { HomeComponent } from './features/home/home.component';
@@ -29,14 +32,12 @@ import { FluidCursorComponent } from './shared/components/fluid-cursor/fluid-cur
 import { OrientationNoticeComponent } from './shared/components/orientation-notice/orientation-notice.component';
 import { PortfolioComponent } from './features/portfolio/portfolio.component';
 import { SplashComponent } from './splash/splash.component';
+import { UserConsentComponent } from './user-consent/user-consent.component';
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
 const MENU_REVEAL_SELECTOR = '.enc';
 const MIN_SPLASH_MS = 3000;
 const REVEAL_PREP_MS = 300;
-// Match kamuicorp's reveal timing exactly: 1.5s polygon collapse + a
-// delayed 0.75s height collapse so the leftover line drops away after the
-// clip-path is mostly done. Splash fade runs concurrent with stage 1.
 const REVEAL_DURATION_S = 1.5;
 const HEIGHT_COLLAPSE_DURATION_S = 0.75;
 const HEIGHT_COLLAPSE_DELAY_S = 1;
@@ -44,15 +45,8 @@ const SPLASH_FADE_DURATION_S = 0.5;
 const SPLASH_UNMOUNT_MS =
   (HEIGHT_COLLAPSE_DELAY_S + HEIGHT_COLLAPSE_DURATION_S + 0.25) * 1000;
 
-// kamuicorp polygons. The "collapsed" form is a degenerate horizontal line
-// at 75% of element height between 25% and 75% of width; the "full" form
-// is the entire element box. We animate the revealer FROM full TO collapsed
-// (the reverse of kamuicorp's wrapper expansion) because our revealer sits
-// on top of content as a curtain, rather than containing the content.
-const POLYGON_FULL =
-  'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)';
-const POLYGON_COLLAPSED =
-  'polygon(25% 75%, 75% 75%, 75% 75%, 25% 75%)';
+const POLYGON_FULL = 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)';
+const POLYGON_COLLAPSED = 'polygon(25% 75%, 75% 75%, 75% 75%, 25% 75%)';
 
 @Component({
   selector: 'app-root',
@@ -72,12 +66,13 @@ const POLYGON_COLLAPSED =
     FluidCursorComponent,
     PortfolioComponent,
     OrientationNoticeComponent,
+    UserConsentComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
+export class AppComponent implements OnDestroy, AfterViewInit {
   protected readonly menuOpen = signal(false);
 
   protected readonly showMain = signal(false);
@@ -97,10 +92,19 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private revealTimer?: ReturnType<typeof setTimeout>;
   private splashUnmountTimer?: ReturnType<typeof setTimeout>;
 
+  isUserConsentedToTracking: boolean | undefined =
+    localStorage.getItem('userConsent') === 'true'
+      ? true
+      : localStorage.getItem('userConsent') === 'false'
+        ? false
+        : undefined;
+
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.bootstrapSplashFlow();
-    }, 2000);
+    if (this.isUserConsentedToTracking !== undefined) {
+      setTimeout(() => {
+        this.bootstrapSplashFlow();
+      }, 2000);
+    }
   }
 
   ngOnDestroy(): void {
@@ -127,15 +131,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private bootstrapSplashFlow(): void {
-    const minDelay = new Promise<void>(resolve =>
+    const minDelay = new Promise<void>((resolve) =>
       setTimeout(resolve, MIN_SPLASH_MS),
     );
 
     const priming = this.assetCache
-      .prime(status =>
-        this.zone.run(() => this.cacheStatus.set(status)),
-      )
-      .catch(err => {
+      .prime((status) => this.zone.run(() => this.cacheStatus.set(status)))
+      .catch((err) => {
         console.warn('[AppComponent] asset cache priming failed', err);
       });
 
@@ -157,13 +159,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       .lenis;
     try {
       lenis?.resize?.();
-    } catch {
-    }
+    } catch {}
 
     try {
       ScrollTrigger.refresh();
-    } catch {
-    }
+    } catch {}
   }
 
   private runRevealTimeline(): void {
@@ -194,5 +194,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       this.showSplash.set(false);
       this.refreshScroll();
     }, SPLASH_UNMOUNT_MS);
+  }
+
+  onUserConsentAction(consent: boolean | undefined): void {
+    this.isUserConsentedToTracking = consent;
+    setTimeout(() => {
+      this.bootstrapSplashFlow();
+    }, 2000);
   }
 }

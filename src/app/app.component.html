@@ -1,33 +1,38 @@
-@if (showSplash()) {
-  <app-splash [status]="cacheStatus()"></app-splash>
-}
-
-@if (showMain()) {
-  <div class="main_wrapper">
-    <div class="main_revealer"></div>
-
-    <div class="main">
-      <app-header [menuOpen]="menuOpen()" (toggle)="toggleMenu()"></app-header>
-
-      <app-bulb></app-bulb>
-
-      @if (menuOpen()) {
-        <app-menu (close)="toggleMenu()"></app-menu>
-      }
-
-      <app-sidebar></app-sidebar>
-
-      <app-home></app-home>
-      <app-about></app-about>
-      <app-designation></app-designation>
-      <app-skills></app-skills>
-      <app-portfolio></app-portfolio>
-      <app-quote></app-quote>
-      <app-footer></app-footer>
-
-      <app-fluid-cursor></app-fluid-cursor>
-
-      <app-orientation-notice></app-orientation-notice>
+@if (isUserConsentedToTracking !== undefined) {
+  @if (showSplash()) {
+    <app-splash [status]="cacheStatus()"></app-splash>
+  }
+  
+  @if (showMain()) {
+    <div class="main_wrapper">
+      <div class="main_revealer"></div>
+  
+      <div class="main">
+        <app-header [menuOpen]="menuOpen()" (toggle)="toggleMenu()"></app-header>
+  
+        <app-bulb></app-bulb>
+  
+        @if (menuOpen()) {
+          <app-menu (close)="toggleMenu()"></app-menu>
+        }
+  
+        <app-sidebar></app-sidebar>
+  
+        <app-home></app-home>
+        <app-about></app-about>
+        <app-designation></app-designation>
+        <app-skills></app-skills>
+        <app-portfolio></app-portfolio>
+        <app-quote></app-quote>
+        <app-footer></app-footer>
+  
+        <app-fluid-cursor></app-fluid-cursor>
+  
+        <app-orientation-notice></app-orientation-notice>
+      </div>
     </div>
-  </div>
+  }
+} @else {
+  <app-user-consent (consentChange)="onUserConsentAction($event)"></app-user-consent>
 }
+
