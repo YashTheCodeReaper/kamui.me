@@ -1,164 +1,115 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, HostListener } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import gsap from 'gsap';
 
-declare var document: any;
+import { CacheStatus } from '../core/services/asset-cache.service';
+
+const SPEED = 1.25;
+
+const DEFAULT_STATUS: CacheStatus = {
+  progress: 0,
+  completed: 0,
+  total: 0,
+  phase: 'idle',
+};
+
+const PHASE_LABEL: Readonly<Record<CacheStatus['phase'], string>> = {
+  idle: 'Preparing',
+  downloading: 'Downloading',
+  hydrating: 'Reading from cache',
+  ready: 'Ready',
+};
+
+const KB = 1024;
+const MB = KB * 1024;
 
 @Component({
   selector: 'app-splash',
   standalone: true,
-  imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './splash.component.html',
   styleUrl: './splash.component.scss',
 })
 export class SplashComponent implements AfterViewInit {
-  klBoxes: any[] = [
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-    [0, 1, 2, 3, 4, 5],
-  ];
-  hasFlippedAll: boolean = false;
+  readonly status = input<CacheStatus>(DEFAULT_STATUS);
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    if (this.hasFlippedAll) this.reverseFlipAll();
-    if (document.body.clientWidth < 764) {
-      this.klBoxes = [
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-      ];
-    } else {
-      this.klBoxes = [
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-      ];
-    }
-    this.initKlItems();
-  }
+  protected readonly progressPercent = computed(() => {
+    const value = this.status().progress;
+    if (Number.isNaN(value)) return 0;
+    return Math.max(0, Math.min(1, value)) * 100;
+  });
+
+  protected readonly phaseLabel = computed(() => PHASE_LABEL[this.status().phase]);
+
+  protected readonly currentAssetName = computed(() => {
+    const path = this.status().current;
+    if (!path) return '';
+    const slash = path.lastIndexOf('/');
+    return slash >= 0 ? path.slice(slash + 1) : path;
+  });
+
+  protected readonly counterLabel = computed(() => {
+    const { completed, total } = this.status();
+    if (total <= 0) return '';
+    return `${completed} / ${total}`;
+  });
+
+  protected readonly currentSizeLabel = computed(() => {
+    const bytes = this.status().currentBytes;
+    if (!bytes || bytes <= 0) return '';
+    if (bytes >= MB) return `${(bytes / MB).toFixed(1)} MB`;
+    if (bytes >= KB) return `${Math.round(bytes / KB)} KB`;
+    return `${bytes} B`;
+  });
 
   ngAfterViewInit(): void {
-    if (document.body.clientWidth < 764) {
-      this.klBoxes = [
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-        [0, 1, 2],
-      ];
-    } else {
-      this.klBoxes = [
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-        [0, 1, 2, 3, 4, 5],
-      ];
-    }
-    this.initKlItems();
+    gsap.to('.splash_section .bar', {
+      opacity: 1,
+      stagger: 0.075,
+      delay: 0.2 * SPEED,
+      duration: 0.5 * SPEED,
+      ease: 'power4.out',
+      onComplete: () => this.settleBars(),
+    });
   }
 
-  initKlItems(forceFlip?: true): void {
-    try {
-      setTimeout(() => {
-        document.querySelectorAll('.kl_wrap_box').forEach((t: any) => {
-          if (forceFlip) {
-            if (this.hasFlippedAll) return;
-            t?.setAttribute('data-hover', 'true');
-            setTimeout(() => {
-              t?.setAttribute('data-hover', 'false');
-            }, 1000);
-          }
-          t.querySelectorAll('.box_component').forEach((e: any) => {
-            if (window.matchMedia(`(max-width: ${768}px)`).matches) {
-              const i = document.body.clientWidth,
-                n = window.innerHeight,
-                r = Math.min(i, n * (764 / 989)),
-                s = r * (989 / 764),
-                o =
-                  (i / -3) * Number(t.style.getPropertyValue('--sp-pos-x')) +
-                  0.5 * (i - r),
-                a =
-                  (n / -6) * Number(t.style.getPropertyValue('--sp-pos-y')) +
-                  0.5 * (n - s);
-              (e.style.backgroundSize = `${r}px ${s}px`),
-                (e.style.backgroundPosition = `left ${o}px top ${a}px`);
-            } else {
-              const i = document.body.clientWidth,
-                n = window.innerHeight,
-                r = Math.min(i, n * (1536 / 975)),
-                s = r * (975 / 1536),
-                o =
-                  (i / -6) * Number(t.style.getPropertyValue('--sp-pos-x')) +
-                  0.5 * (i - r),
-                a =
-                  (n / -6) * Number(t.style.getPropertyValue('--sp-pos-y')) +
-                  0.5 * (n - s);
-              (e.style.backgroundSize = `${r}px ${s}px`),
-                (e.style.backgroundPosition = `left ${o}px top ${a}px`);
-            }
-          });
-        });
-      });
-    } catch (ex) {
-      console.error(ex);
-    }
+  private settleBars(): void {
+    gsap.to('.splash_section .bar', {
+      top: 'calc(calc(var(--ssjbari) - 1) * calc(1rem * var(--ssjscale)))',
+      height:
+        'calc(100% - var(--ssjbari) * calc(0.5rem * var(--ssjscale)))',
+      stagger: 0.065,
+      duration: 0.3 * SPEED,
+      ease: 'power4.out',
+      onComplete: () => this.startFillerLoop(),
+    });
   }
 
-  onItemHover(klBox: Element): void {
-    try {
-      if (this.hasFlippedAll) return;
-      klBox?.setAttribute('data-hover', 'true');
-      setTimeout(() => {
-        klBox?.setAttribute('data-hover', 'false');
-      }, 1000);
-    } catch (ex) {
-      console.error(ex);
-    }
-  }
-
-  flipAll(): void {
-    try {
-      if (this.hasFlippedAll) return;
-      document
-        .querySelector('.kamui_lander')
-        .classList.add('kamui_lander-final');
-      document.querySelector('.kl_wrap').classList.add('kl_wrap-final');
-      document.querySelectorAll('.kl_wrap_box').forEach((e: any, i: number) => {
-        setTimeout(() => {
-          e?.setAttribute('data-turn', 'true');
-        }, i * 10);
-      });
-      this.hasFlippedAll = true;
-    } catch (ex) {
-      console.error(ex);
-    }
-  }
-
-  reverseFlipAll(): void {
-    try {
-      if (!this.hasFlippedAll) return;
-      document
-        .querySelector('.kamui_lander')
-        .classList.remove('kamui_lander-final');
-      document.querySelector('.kl_wrap').classList.remove('kl_wrap-final');
-      document.querySelectorAll('.kl_wrap_box').forEach((e: any, i: number) => {
-        e?.setAttribute('data-turn', 'false');
-      });
-      this.hasFlippedAll = false;
-    } catch (ex) {
-      console.error(ex);
-    }
+  private startFillerLoop(): void {
+    gsap.to('.splash_section .bar_enc1', {
+      height: '100%',
+      ease: 'power4.in',
+      repeat: -1,
+      repeatDelay: 2 * SPEED,
+      bottom: 'unset',
+      top: 0,
+      duration: 0.75 * SPEED,
+      delay: 0.2 * SPEED,
+    });
+    gsap.to('.splash_section .bar_enc2', {
+      height: '100%',
+      ease: 'power4.in',
+      repeat: -1,
+      repeatDelay: 2 * SPEED,
+      bottom: 'unset',
+      top: 0,
+      duration: 0.75 * SPEED,
+      delay: 0.5 * SPEED,
+    });
   }
 }

@@ -1,134 +1,164 @@
-.kamui_lander {
+.splash_section {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100dvw;
   height: 100dvh;
-  position: relative;
-  background-color: var(--main-1);
-  overflow: hidden;
-  transform-style: preserve-3d;
-  perspective: 100rem;
+  z-index: 100001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-3);
 
-  .border {
-    height: 0.1rem;
-    background-color: var(--main-3);
-    opacity: 0.5;
-    position: absolute;
-    bottom: 5.75rem;
-    left: 5rem;
-    max-width: calc(100vw - 15rem);
-    z-index: 2;
-    animation: kl_op-animate 250ms linear forwards;
-    animation-delay: 4s;
-  }
+  .progress_bar_track {
+    width: 0;
+    position: relative;
+    height: 0.25rem;
+    border-radius: 5rem;
+    overflow: hidden;
+    margin-top: 5rem;
+    margin-left: -0.75rem;
+    animation: splash-progress-track-grow 1s ease forwards;
+    animation-delay: 500ms;
 
-  h5 {
-    color: var(--main-3);
-    position: absolute;
-    bottom: 5rem;
-    right: 5rem;
-    font-size: 1.4rem;
-    font-weight: 500;
-    z-index: 2;
-    animation: kl_op-animate 250ms linear forwards;
-    animation-delay: 4s;
-  }
+    .progress_bar {
+      background-color: var(--main-1);
+      height: 100%;
+      width: calc(var(--pb) * 1%);
+      // Smooth growth as cache priming streams progress in.
+      transition: width 240ms ease-out;
+    }
 
-  .kl_wrap {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    grid-gap: min(min(3px,.1919385797vw),.3076923077svh);
-    gap: min(min(3px,.1919385797vw),.3076923077svh);
-    transform: translateZ(-20px);
-    transform-style: preserve-3d;
-    will-change: transform;
-
-    &_box {
-      position: relative;
-      transform: rotateX(0);
-      transform-style: preserve-3d;
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      will-change: transform;
+      background-color: var(--main-1);
+      opacity: 0.25;
+    }
+  }
 
-      .box_component {
+  .jail {
+    position: relative;
+    width: calc(9rem * var(--ssjscale));
+    height: calc(6rem * var(--ssjscale));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .bar {
+      position: absolute;
+      width: calc(100% / 9);
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      border: 0.1rem solid var(--main-1);
+      opacity: 0;
+      left: calc(
+        calc(var(--ssjbaril) - calc(1 * var(--ssjscale))) *
+          calc(1rem * var(--ssjscale))
+      );
+
+      .bar_enc {
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
-        height: 100%;
-        overflow: hidden;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        border-radius: 0.25rem;
-        backface-visibility: hidden;
-        background-repeat: no-repeat;
-        overflow: hidden;
+        left: 0;
+        height: 0;
+        bottom: 0;
 
-        &[data-box-component="front"] {
-          background-color: var(--main-1a);
-          background-image: url("../../assets/images/kl_bg_landscape.jpg");
-          background-repeat: no-repeat;
-          transform: rotateX(360deg);
-        }
-
-        &[data-box-component="back"] {
+        &1 {
+          z-index: 1;
           background-color: var(--main-2);
-          background-image: url("../../assets/images/kl_bg_landscape_1.jpg");
-          transform: rotateX(180deg);
         }
-      }
 
-      &[data-hover="true"] {
-        transition: none;
-        transform-style: preserve-3d;
-      }
-
-      &[data-hover="true"] [data-box-component="front"] {
-        animation: kl_rotate-front 1s linear forwards;
-      }
-
-      &[data-hover="true"] [data-box-component="back"] {
-        animation: kl_rotate-back 1s linear forwards;
-      }
-
-      &[data-turn="true"] {
-        animation: kl_rotate-permanent 600ms linear forwards;
-      }
-    }
-  }
-
-  .kl_wrap_mini {
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: min(min(3px,.3926701571vw),.1958224543svh);
-    gap: min(min(3px,.3926701571vw),.1958224543svh);
-    transform: translateZ(-30px);
-
-    .kl_wrap_box {
-      .box_component {
-        &[data-box-component="front"] {
-          background-image: url("../../assets/images/kl_bg_portrait.jpg");
+        &2 {
+          z-index: 2;
+          background-color: var(--main-3);
         }
-        &[data-box-component="back"] {
-          background-image: url("../../assets/images/kl_bg_portrait_1.jpg");
-        }
-      }
-    }
-  }
-
-  .kl_wrap-final {
-    animation: kl_gap-animate 1s linear forwards;
-
-    .kl_wrap_box {
-      .box_component {
-        animation: kl_br-animate 1s linear forwards;
       }
     }
   }
 }
 
-.kamui_lander-final {
-  animation: kl_bg-animate 1s forwards linear;
+// ----- Cache priming status -------------------------------------------------
+// Sits below the progress bar inside `.splash_section`. Two-line layout:
+//   row 1: phase label + counter ("Downloading 12 / 19")
+//   row 2: current asset filename + optional size ("vader.mp4 · 31.2 MB")
+
+.splash_section {
+  .cache_info {
+    margin-top: 1.5rem;
+    width: min(36rem, calc(100dvw - 3rem));
+    color: var(--main-1);
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    opacity: 0;
+    animation: splash-cache-info-in 600ms ease forwards;
+    animation-delay: 800ms;
+  }
+
+  .cache_info__phase {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  .cache_info__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--main-2);
+    animation: splash-cache-info-pulse 1.4s ease-in-out infinite;
+  }
+
+  .cache_info__counter {
+    margin-left: 0.4rem;
+    color: var(--main-2);
+    font-weight: 700;
+  }
+
+  .cache_info__path {
+    margin-top: 0.6rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    // Long names truncate gracefully on phones.
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cache_info__size {
+    margin-left: 0.3rem;
+    opacity: 0.6;
+    font-weight: 300;
+  }
+}
+
+@keyframes splash-progress-track-grow {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: calc(9rem * 1.5);
+  }
+}
+
+@keyframes splash-cache-info-in {
+  from { opacity: 0; transform: translateY(0.4rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes splash-cache-info-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50%      { opacity: 1;   transform: scale(1.1); }
 }

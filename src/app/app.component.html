@@ -1,23 +1,33 @@
-<div class="main">
-  <app-header [menuOpen]="menuOpen()" (toggle)="toggleMenu()"></app-header>
+@if (showSplash()) {
+  <app-splash [status]="cacheStatus()"></app-splash>
+}
 
-  <app-bulb></app-bulb>
+@if (showMain()) {
+  <div class="main_wrapper">
+    <div class="main_revealer"></div>
 
-  @if (menuOpen()) {
-    <app-menu (close)="toggleMenu()"></app-menu>
-  }
+    <div class="main">
+      <app-header [menuOpen]="menuOpen()" (toggle)="toggleMenu()"></app-header>
 
-  <app-sidebar></app-sidebar>
+      <app-bulb></app-bulb>
 
-  <app-home></app-home>
-  <app-about></app-about>
-  <app-designation></app-designation>
-  <app-skills></app-skills>
-  <app-portfolio></app-portfolio>
-  <app-quote></app-quote>
-  <app-footer></app-footer>
+      @if (menuOpen()) {
+        <app-menu (close)="toggleMenu()"></app-menu>
+      }
 
-  <app-fluid-cursor></app-fluid-cursor>
+      <app-sidebar></app-sidebar>
 
-  <app-orientation-notice></app-orientation-notice>
-</div>
+      <app-home></app-home>
+      <app-about></app-about>
+      <app-designation></app-designation>
+      <app-skills></app-skills>
+      <app-portfolio></app-portfolio>
+      <app-quote></app-quote>
+      <app-footer></app-footer>
+
+      <app-fluid-cursor></app-fluid-cursor>
+
+      <app-orientation-notice></app-orientation-notice>
+    </div>
+  </div>
+}

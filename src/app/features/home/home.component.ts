@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { gsap, Power3 } from 'gsap';
 
+import { AssetCacheService } from '../../core/services/asset-cache.service';
 import {
   ModelScene,
   decoratePbrMetal,
@@ -44,6 +45,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private readonly heroVideoRef!: ElementRef<HTMLVideoElement>;
 
   private readonly document = inject(DOCUMENT);
+  private readonly assetCache = inject(AssetCacheService);
 
   protected readonly slides = FEATURE_SLIDES;
   protected readonly activeIndex = signal(0);
@@ -101,7 +103,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             if (!loaded) {
-              video.src = HERO_VIDEO_PATH;
+              video.src = this.assetCache.cachedUrl(HERO_VIDEO_PATH);
               loaded = true;
             }
             void video.play().catch(() => {
@@ -129,7 +131,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       },
     });
     this.maskScene
-      .load(MASK_MODEL_PATH)
+      .load(this.assetCache.cachedUrl(MASK_MODEL_PATH))
       .catch(err => console.error('[HomeComponent] mask load failed', err));
     this.maskScene.start();
   }

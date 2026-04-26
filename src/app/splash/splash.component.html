@@ -1,22 +1,64 @@
-<section class="kamui_lander" (mousewheel)="flipAll()">
-  <div class="kl_wrap" [ngClass]="{ kl_wrap_mini: klBoxes[0].length === 3 }">
-    <ng-container *ngFor="let klBoxL1 of klBoxes; let i = index">
-      <div
-        *ngFor="let klBoxL2 of klBoxL1"
-        class="kl_wrap_box"
-        #klBox
-        data-hover="false"
-        data-turn="false"
-        [style]="{
-          '--sp-pos-x': klBoxL2,
-          '--sp-pos-y': i
-        }"
-        (mouseenter)="onItemHover(klBox)"
-        (touchstart)="onItemHover(klBox)"
-      >
-        <div class="box_component" data-box-component="front"></div>
-        <div class="box_component" data-box-component="back"></div>
+<section class="splash_section">
+  <div class="jail" style="--ssjscale: 1.5">
+    <div class="bar" style="--ssjbari: 1; --ssjbaril: 1">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 2; --ssjbaril: 2">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 3; --ssjbaril: 3">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 4; --ssjbaril: 4">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 5; --ssjbaril: 5">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 4; --ssjbaril: 6">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 3; --ssjbaril: 7">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 2; --ssjbaril: 8">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+    <div class="bar" style="--ssjbari: 1; --ssjbaril: 9">
+      <div class="bar_enc bar_enc1"></div>
+      <div class="bar_enc bar_enc2"></div>
+    </div>
+  </div>
+  <div class="progress_bar_track">
+    <div
+      class="progress_bar"
+      [style.--pb]="progressPercent()"
+    ></div>
+  </div>
+
+  <div class="cache_info ff_mb">
+    <div class="cache_info__phase">
+      <span class="cache_info__dot"></span>
+      <span>{{ phaseLabel() }}</span>
+      @if (counterLabel()) {
+        <span class="cache_info__counter">{{ counterLabel() }}</span>
+      }
+    </div>
+    @if (currentAssetName()) {
+      <div class="cache_info__path" [title]="status().current ?? ''">
+        {{ currentAssetName() }}
+        @if (currentSizeLabel()) {
+          <span class="cache_info__size">· {{ currentSizeLabel() }}</span>
+        }
       </div>
-    </ng-container>
+    }
   </div>
 </section>

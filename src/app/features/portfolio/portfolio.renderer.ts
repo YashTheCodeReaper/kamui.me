@@ -120,6 +120,12 @@ export class PortfolioSliderRenderer {
     private readonly slides: readonly PortfolioSlide[],
     private readonly onActiveSlideChange: (index: number, slide: PortfolioSlide) => void,
     config: Partial<PortfolioSliderConfig> = {},
+    /**
+     * Optional URL rewriter — typically wired to the IDB asset cache so
+     * slide textures load from `blob:` URLs on warm visits. Defaults to
+     * identity so callers that don't care still get the original behaviour.
+     */
+    private readonly resolveUrl: (path: string) => string = path => path,
   ) {
     this.config = { ...DEFAULT_CONFIG, ...config };
 
@@ -185,7 +191,7 @@ export class PortfolioSliderRenderer {
         index: i,
       });
 
-      loader.load(slides[i].img, texture => {
+      loader.load(this.resolveUrl(slides[i].img), texture => {
         if (this.disposed) {
           texture.dispose();
           return;

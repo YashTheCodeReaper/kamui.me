@@ -10,6 +10,7 @@ import {
   signal,
 } from '@angular/core';
 
+import { AssetCacheService } from '../../core/services/asset-cache.service';
 import { PortfolioSlide, PortfolioSliderRenderer } from './portfolio.renderer';
 
 // Slides driven by the assets in src/assets/images/portfolio. Per-slide
@@ -50,6 +51,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   private readonly canvasRef!: ElementRef<HTMLCanvasElement>;
 
   private readonly hostRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly assetCache = inject(AssetCacheService);
 
   protected readonly slides = SLIDES;
   protected readonly activeIndex = signal(0);
@@ -67,6 +69,8 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         this.hostRef.nativeElement,
         this.slides,
         index => this.activeIndex.set(index),
+        {},
+        path => this.assetCache.cachedUrl(path),
       );
       this.renderer.start();
     } catch (err) {

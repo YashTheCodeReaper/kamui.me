@@ -6,10 +6,12 @@ import {
   HostListener,
   OnDestroy,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { AssetCacheService } from '../../core/services/asset-cache.service';
 import {
   ModelScene,
   createSilhouetteDecorator,
@@ -32,6 +34,8 @@ const SILHOUETTE_COLOUR = 0x2d2d2d;
 export class DesignationComponent implements AfterViewInit, OnDestroy {
   @ViewChild('sceneHost', { static: true })
   private readonly sceneHost!: ElementRef<HTMLElement>;
+
+  private readonly assetCache = inject(AssetCacheService);
 
   private scene?: ModelScene;
   private headlineTween?: gsap.core.Tween;
@@ -67,7 +71,7 @@ export class DesignationComponent implements AfterViewInit, OnDestroy {
     });
 
     this.scene
-      .load(SAMURAI_MODEL_PATH)
+      .load(this.assetCache.cachedUrl(SAMURAI_MODEL_PATH))
       .catch((err) =>
         console.error('[DesignationComponent] samurai load failed', err),
       );
