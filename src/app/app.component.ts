@@ -8,6 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { gsap, Power4 } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import CustomEase from 'gsap/CustomEase';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('reveal', '0.9, 0, 0.1, 1');
 
 import { AssetCacheService, CacheStatus } from './core/services/asset-cache.service';
 import { AboutComponent } from './features/about/about.component';
@@ -27,11 +32,27 @@ import { SplashComponent } from './splash/splash.component';
 
 const MENU_CLOSE_DURATION_SECONDS = 0.5;
 const MENU_REVEAL_SELECTOR = '.enc';
-const MIN_SPLASH_MS = 4000;
+const MIN_SPLASH_MS = 3000;
 const REVEAL_PREP_MS = 300;
-const REVEAL_DURATION_S = 1.2;
+// Match kamuicorp's reveal timing exactly: 1.5s polygon collapse + a
+// delayed 0.75s height collapse so the leftover line drops away after the
+// clip-path is mostly done. Splash fade runs concurrent with stage 1.
+const REVEAL_DURATION_S = 1.5;
+const HEIGHT_COLLAPSE_DURATION_S = 0.75;
+const HEIGHT_COLLAPSE_DELAY_S = 1;
 const SPLASH_FADE_DURATION_S = 0.5;
-const SPLASH_UNMOUNT_MS = (REVEAL_DURATION_S + 0.2) * 1000;
+const SPLASH_UNMOUNT_MS =
+  (HEIGHT_COLLAPSE_DELAY_S + HEIGHT_COLLAPSE_DURATION_S + 0.25) * 1000;
+
+// kamuicorp polygons. The "collapsed" form is a degenerate horizontal line
+// at 75% of element height between 25% and 75% of width; the "full" form
+// is the entire element box. We animate the revealer FROM full TO collapsed
+// (the reverse of kamuicorp's wrapper expansion) because our revealer sits
+// on top of content as a curtain, rather than containing the content.
+const POLYGON_FULL =
+  'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)';
+const POLYGON_COLLAPSED =
+  'polygon(25% 75%, 75% 75%, 75% 75%, 25% 75%)';
 
 @Component({
   selector: 'app-root',
@@ -121,27 +142,57 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     Promise.all([priming, minDelay]).then(() => {
       this.zone.run(() => {
         this.showMain.set(true);
-        this.revealTimer = setTimeout(
-          () => this.runRevealTimeline(),
-          REVEAL_PREP_MS,
-        );
+        this.revealTimer = setTimeout(() => {
+          this.refreshScroll();
+          this.runRevealTimeline();
+        }, REVEAL_PREP_MS);
       });
     });
   }
 
+  private refreshScroll(): void {
+    if (typeof window === 'undefined') return;
+
+    const lenis = (window as unknown as { lenis?: { resize?: () => void } })
+      .lenis;
+    try {
+      lenis?.resize?.();
+    } catch {
+    }
+
+    try {
+      ScrollTrigger.refresh();
+    } catch {
+    }
+  }
+
   private runRevealTimeline(): void {
+    gsap.fromTo(
+      '.main_revealer',
+      { clipPath: POLYGON_FULL },
+      {
+        clipPath: POLYGON_COLLAPSED,
+        ease: 'reveal',
+        duration: REVEAL_DURATION_S,
+      },
+    );
+
     gsap.to('.main_revealer', {
       height: 0,
-      ease: 'power4.inOut',
-      duration: REVEAL_DURATION_S,
+      ease: 'power4.out',
+      duration: HEIGHT_COLLAPSE_DURATION_S,
+      delay: HEIGHT_COLLAPSE_DELAY_S,
     });
+
     gsap.to('.splash_section', {
       opacity: 0,
       ease: 'power2.out',
       duration: SPLASH_FADE_DURATION_S,
     });
+
     this.splashUnmountTimer = setTimeout(() => {
       this.showSplash.set(false);
+      this.refreshScroll();
     }, SPLASH_UNMOUNT_MS);
   }
 }
