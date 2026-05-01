@@ -2,49 +2,135 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Kamui.Me — A Craft By Yashwanthkumar</title>
     <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- Primary -->
+    <title>Yashwanthkumar — Full-Stack Engineer & AI Scientist | Kamui.Me</title>
     <meta
       name="description"
-      content="Portfolio of Yashwanth — full stack engineer and AI scientist. Real-time WebGL, Angular, and motion-driven interfaces."
+      content="Yashwanthkumar Arivazhagan is a full-stack engineer and AI scientist crafting real-time WebGL, Angular, and motion-driven interfaces. Explore the portfolio behind Kamui.Me."
     />
-    <meta name="author" content="Yashwanth" />
-    <meta name="robots" content="index, follow" />
+    <meta
+      name="keywords"
+      content="Yashwanthkumar, Yashwanth Kumar, Kamui.Me, full stack engineer, AI scientist, frontend developer, Angular developer, WebGL, Three.js, GSAP, motion design, creative developer, portfolio, India"
+    />
+    <meta name="author" content="Yashwanthkumar Arivazhagan" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta
+      name="googlebot"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="rating" content="general" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href="https://kamui.me/" />
 
-    <!-- Open Graph / social -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Kamui.Me — Crafted by Yashwanthkumar" />
+    <meta property="og:site_name" content="Kamui.Me" />
+    <meta property="og:title" content="Yashwanthkumar — Full-Stack Engineer & AI Scientist" />
     <meta
       property="og:description"
-      content="Full stack engineer and AI scientist. Real-time WebGL, Angular, and motion-driven interfaces."
+      content="Crafting real-time WebGL, Angular, and motion-driven interfaces. The portfolio behind Kamui.Me."
     />
     <meta property="og:url" content="https://kamui.me/" />
-    <meta property="og:site_name" content="Kamui.Me" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Kamui.Me — Crafted by Yashwanthkumar" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://kamui.me/og-cover.jpg" />
+    <meta property="og:image:secure_url" content="https://kamui.me/og-cover.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      name="twitter:description"
-      content="Full stack engineer and AI scientist. Real-time WebGL, Angular, and motion-driven interfaces."
+      property="og:image:alt"
+      content="Kamui.Me — portfolio of Yashwanthkumar, full-stack engineer and AI scientist"
     />
 
-    <link rel="canonical" href="https://kamui.me/" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon-96x96.png?v=20260425"
-      sizes="96x96"
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yashwanthkumar — Full-Stack Engineer & AI Scientist" />
+    <meta
+      name="twitter:description"
+      content="Real-time WebGL, Angular, and motion-driven interfaces. The portfolio behind Kamui.Me."
     />
+    <meta name="twitter:image" content="https://kamui.me/og-cover.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Kamui.Me — portfolio of Yashwanthkumar, full-stack engineer and AI scientist"
+    />
+
+    <!-- Icons / PWA -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260425" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260425" />
     <link rel="shortcut icon" href="/favicon.ico?v=20260425" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/apple-touch-icon.png?v=20260425"
-    />
-    <meta name="apple-mobile-web-app-title" content="Kamui.Me" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260425" />
     <link rel="manifest" href="/site.webmanifest?v=20260425" />
+    <meta name="apple-mobile-web-app-title" content="Kamui.Me" />
+    <meta name="application-name" content="Kamui.Me" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Performance hints — preconnect/dns-prefetch the icon CDN so its
+         CSS request handshake is already warm by the time the deferred
+         Angular bundle requests it. -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
+    <!--
+      Structured data (JSON-LD). Two graphs:
+        • Person — describes the human behind the site for Google's
+          knowledge panel + rich results.
+        • WebSite — declares the canonical site identity + sitelinks
+          search box surface (search action is intentional even when no
+          internal search exists, because Google ignores it gracefully).
+      Update sameAs URLs as social accounts come online.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://kamui.me/#person",
+            "name": "Yashwanthkumar Arivazhagan",
+            "alternateName": ["Yashwanth", "Kamui"],
+            "url": "https://kamui.me/",
+            "jobTitle": "Full-Stack Engineer & AI Scientist",
+            "image": "https://kamui.me/og-cover.jpg",
+            "knowsAbout": [
+              "Full-stack engineering",
+              "Artificial intelligence",
+              "Angular",
+              "Three.js",
+              "WebGL",
+              "GSAP",
+              "Motion design",
+              "Creative development"
+            ],
+            "sameAs": [
+              "https://instagram.com/_yash_itaxxci"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://kamui.me/#website",
+            "url": "https://kamui.me/",
+            "name": "Kamui.Me",
+            "description": "Portfolio of Yashwanthkumar — full-stack engineer and AI scientist.",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://kamui.me/#person" },
+            "author": { "@id": "https://kamui.me/#person" }
+          }
+        ]
+      }
+    </script>
 
     <!--
       Vendor scripts: defer so they don't block parsing of the Angular bundle.
@@ -56,6 +142,17 @@
   </head>
 
   <body id="body" class="theme_light">
+    <!-- Crawlable fallback content for the rare bot that ignores JS. Real
+         users see this only for the brief moment before Angular hydrates,
+         hidden via inline display:none on the SPA boot. -->
+    <noscript>
+      <h1>Yashwanthkumar — Full-Stack Engineer &amp; AI Scientist</h1>
+      <p>
+        This site is an interactive portfolio that requires JavaScript.
+        Please enable JavaScript or contact
+        <a href="mailto:touch@yashkamui.me">touch@yashkamui.me</a>.
+      </p>
+    </noscript>
     <app-root></app-root>
     <script src="assets/js/hscr.js" defer></script>
   </body>

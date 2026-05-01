@@ -27,6 +27,19 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/favicon.svg",
+              "src/favicon-96x96.png",
+              "src/apple-touch-icon.png",
+              "src/web-app-manifest-192x192.png",
+              "src/web-app-manifest-512x512.png",
+              "src/site.webmanifest",
+              "src/robots.txt",
+              "src/sitemap.xml",
+              {
+                "glob": "og-cover.{jpg,png,webp}",
+                "input": "src",
+                "output": ""
+              },
               "src/assets"
             ],
             "styles": [

@@ -1,23 +1,33 @@
+<!--
+  Always-rendered SEO heading. Crawlers see the page's canonical title
+  even if they bail before the splash → main reveal completes (~3s).
+  `.sr-only` keeps it out of the visual layout while remaining in the
+  accessibility tree + DOM source.
+-->
+<h1 class="sr-only">
+  Yashwanthkumar — Full-Stack Engineer &amp; AI Scientist
+</h1>
+
 @if (isUserConsentedToTracking !== undefined) {
   @if (showSplash()) {
     <app-splash [status]="cacheStatus()"></app-splash>
   }
-  
+
   @if (showMain()) {
-    <div class="main_wrapper">
+    <main class="main_wrapper" role="main">
       <div class="main_revealer"></div>
-  
+
       <div class="main">
         <app-header [menuOpen]="menuOpen()" (toggle)="toggleMenu()"></app-header>
-  
+
         <app-bulb></app-bulb>
-  
+
         @if (menuOpen()) {
           <app-menu (close)="toggleMenu()"></app-menu>
         }
-  
+
         <app-sidebar></app-sidebar>
-  
+
         <app-home></app-home>
         <app-about></app-about>
         <app-designation></app-designation>
@@ -25,14 +35,13 @@
         <app-portfolio></app-portfolio>
         <app-quote></app-quote>
         <app-footer></app-footer>
-  
+
         <!-- <app-fluid-cursor></app-fluid-cursor> -->
-  
+
         <app-orientation-notice></app-orientation-notice>
       </div>
-    </div>
+    </main>
   }
 } @else {
   <app-user-consent (consentChange)="onUserConsentAction($event)"></app-user-consent>
 }
-

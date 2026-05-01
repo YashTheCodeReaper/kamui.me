@@ -12,3 +12,18 @@ canvas {
   height: 100%;
   pointer-events: none;
 }
+
+// Screen-reader-only utility. Used by the always-rendered SEO h1 in
+// app.component.html so crawlers and assistive tech see a canonical
+// page heading without it appearing in the visual design.
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

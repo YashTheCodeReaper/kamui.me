@@ -20,6 +20,10 @@ import {
   pbrRedKeyLighting,
 } from '../../shared/three/model-scene';
 import { TextRevealDirective } from '../../shared/directives/text-reveal.directive';
+import {
+  subscribeToDeviceOrientation,
+  supportsDeviceOrientation,
+} from '../../shared/utils/device-orientation';
 import { FEATURE_SLIDES } from './data/feature-slides';
 
 declare const Gradient: new () => { initGradient(selector: string): void };
@@ -55,18 +59,21 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private cycleTimer?: ReturnType<typeof setInterval>;
   private exitTimer?: ReturnType<typeof setTimeout>;
   private heroVideoObserver?: IntersectionObserver;
+  private orientationUnsubscribe?: () => void;
 
   ngAfterViewInit(): void {
     this.initBackgroundGradient();
     this.initSlider();
     this.initMaskScene();
     this.initHeroVideo();
+    this.initGyroscopeMaskControl();
   }
 
   ngOnDestroy(): void {
     if (this.cycleTimer) clearInterval(this.cycleTimer);
     if (this.exitTimer) clearTimeout(this.exitTimer);
     this.heroVideoObserver?.disconnect();
+    this.orientationUnsubscribe?.();
     this.maskScene?.dispose();
   }
 
@@ -117,6 +124,51 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       { rootMargin: '25% 0px' },
     );
     this.heroVideoObserver.observe(video);
+  }
+
+  /**
+   * Touch devices have no `mousemove` to drive the mask, so the model just
+   * sits frozen. Hook the gyroscope instead and synthesise a "virtual
+   * pointer" position from the device tilt — same `setPointer()` API the
+   * mouse path already uses, so the existing rotation smoothing kicks in
+   * unchanged.
+   *
+   * Tilt mapping:
+   *   - `gamma` (left-right tilt, -90..90)   →  virtual clientX
+   *     Clamped to ±35° so a tiny lean produces a meaningful rotation
+   *     and the user doesn't need to pivot the device wildly.
+   *   - `beta` (front-back tilt, -180..180)  →  virtual clientY
+   *     Centred around 60° (a comfortable phone-in-hand angle), clamped
+   *     to ±30° around that so vertical motion has perceptible range.
+   *
+   * No-ops on non-touch devices and on iOS until the user grants the
+   * permission prompt (deferred to the next tap by the helper).
+   */
+  private initGyroscopeMaskControl(): void {
+    if (!supportsDeviceOrientation()) return;
+
+    const GAMMA_RANGE = 35; // ±35° → full horizontal sweep
+    const BETA_CENTRE = 60; // baseline phone-in-hand pitch
+    const BETA_RANGE = 30; // ±30° around the baseline
+
+    this.orientationUnsubscribe = subscribeToDeviceOrientation(({ beta, gamma }) => {
+      if (!this.maskScene) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      const gammaClamped = Math.max(-GAMMA_RANGE, Math.min(GAMMA_RANGE, gamma));
+      const virtualX = ((gammaClamped + GAMMA_RANGE) / (GAMMA_RANGE * 2)) * w;
+
+      const betaClamped = Math.max(
+        BETA_CENTRE - BETA_RANGE,
+        Math.min(BETA_CENTRE + BETA_RANGE, beta),
+      );
+      // Invert so tilting forward (lower beta) raises the mask's gaze and
+      // tilting back (higher beta) lowers it — matches what feels natural.
+      const virtualY = ((BETA_CENTRE + BETA_RANGE - betaClamped) / (BETA_RANGE * 2)) * h;
+
+      this.maskScene.setPointer(virtualX, virtualY);
+    });
   }
 
   private initMaskScene(): void {

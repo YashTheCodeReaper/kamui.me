@@ -266,9 +266,17 @@ export class PortfolioSliderRenderer {
     // page from scrolling underneath the slider while it's being interacted with.
     this.host.addEventListener('wheel', this.onWheel, { passive: false });
     this.host.addEventListener('mousedown', this.onMouseDown);
-    this.host.addEventListener('touchstart', this.onTouchStart, { passive: false });
-    this.host.addEventListener('touchmove', this.onTouchMove, { passive: false });
-    this.host.addEventListener('touchend', this.onTouchEnd);
+    // Touch listeners go on the canvas itself (not the host) so that
+    //   1. they fire on the element that already owns `touch-action: none`,
+    //   2. preventDefault races body's native scroll on the actual touch
+    //      target rather than waiting for the bubble through section/host —
+    //      iOS Safari sometimes commits the native pan before a host-level
+    //      listener can cancel it.
+    // Touch sequences are routed to the originating element regardless of
+    // where the finger drifts, so canvas-only listeners catch every move.
+    this.canvas.addEventListener('touchstart', this.onTouchStart, { passive: false });
+    this.canvas.addEventListener('touchmove', this.onTouchMove, { passive: false });
+    this.canvas.addEventListener('touchend', this.onTouchEnd);
     // Drag moves and releases must follow the cursor even outside the host.
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('mouseup', this.onMouseUp);
@@ -280,9 +288,9 @@ export class PortfolioSliderRenderer {
   private detachListeners(): void {
     this.host.removeEventListener('wheel', this.onWheel);
     this.host.removeEventListener('mousedown', this.onMouseDown);
-    this.host.removeEventListener('touchstart', this.onTouchStart);
-    this.host.removeEventListener('touchmove', this.onTouchMove);
-    this.host.removeEventListener('touchend', this.onTouchEnd);
+    this.canvas.removeEventListener('touchstart', this.onTouchStart);
+    this.canvas.removeEventListener('touchmove', this.onTouchMove);
+    this.canvas.removeEventListener('touchend', this.onTouchEnd);
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
   }
