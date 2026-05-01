@@ -12,7 +12,24 @@ html {
 
 body {
   width: 100dvw;
-  height: 100dvh;
-  overflow: hidden;
+  // Document must remain natively scrollable on touch devices. Lenis only
+  // smooth-scrolls wheel events (it preventDefaults them and translates
+  // the page via JS); on touch it lets the browser scroll natively. With
+  // `overflow: hidden` + a fixed `100dvh` the page can't scroll at all on
+  // a phone — wheel works, fingers don't. Letting body grow to content
+  // height with `overflow-x: hidden` keeps the layout intact while
+  // re-enabling native touch panning.
+  min-height: 100dvh;
+  overflow-x: hidden;
   font-optical-sizing: auto;
+
+  // Hide the desktop scrollbar so Lenis's smooth scroll is the only
+  // visible scroll affordance. Touch devices keep their native overlay
+  // scrollbar, which is what users expect.
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  scrollbar-width: none;
 }

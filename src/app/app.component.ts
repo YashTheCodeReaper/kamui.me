@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  HostListener,
   NgZone,
   OnDestroy,
+  Renderer2,
   inject,
   signal,
 } from '@angular/core';
@@ -99,12 +101,15 @@ export class AppComponent implements OnDestroy, AfterViewInit {
         ? false
         : undefined;
 
+  constructor(private renderer: Renderer2) {}
+
   ngAfterViewInit(): void {
     if (this.isUserConsentedToTracking !== undefined) {
       setTimeout(() => {
         this.bootstrapSplashFlow();
       }, 2000);
     }
+    this.calculateFontSize(window.outerWidth);
   }
 
   ngOnDestroy(): void {
@@ -201,5 +206,24 @@ export class AppComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.bootstrapSplashFlow();
     }, 2000);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.calculateFontSize(window.outerWidth);
+  }
+
+  private calculateFontSize(width: number) {
+    if (width > 768) {
+      const dynamicSize = (63 / 1512) * width;
+
+      this.renderer.setStyle(
+        document.documentElement,
+        'font-size',
+        `${dynamicSize}%`,
+      );
+    } else {
+      this.renderer.setStyle(document.documentElement, 'font-size', '62.5%');
+    }
   }
 }
